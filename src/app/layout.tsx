@@ -1,11 +1,38 @@
 import "~/styles/globals.css";
+import HeaderNavButton from "~/components/common/HeaderNavButton";
 
 import { Inter } from "next/font/google";
+import Header from "~/components/common/Header";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
+type HeaderNavButtonProps = React.ComponentProps<typeof HeaderNavButton>;
+
+const headerNavButtons:HeaderNavButtonProps[] = [
+  {
+    label: "Categories",
+    href: "/categories",
+  },
+  {
+    label: "Sale",
+    href: "/sale",
+  },
+  {
+    label: "Clearance",
+    href: "/clearance",
+  },
+  {
+    label: "New stock",
+    href: "/new-stock",
+  },
+  {
+    label: "Trending",
+    href: "/trending",
+  },
+]
 
 export const metadata = {
   title: "Create T3 App",
@@ -20,7 +47,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>{children}</body>
+      <body className={`font-sans ${inter.variable}`}>
+        <Header
+          headerNavButtonsData={headerNavButtons}
+        />
+        {children}</body>
     </html>
   );
 }
