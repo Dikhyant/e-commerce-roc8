@@ -53,10 +53,12 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
             if((error as ApiResponseError)?.message) {
                 alert((error as ApiResponseError).message);
             }
+        } finally {
+            setDisableSubmitButton(false);
+            setShowSubmitButtonLoader(false);
         }
 
-        setDisableSubmitButton(false);
-        setShowSubmitButtonLoader(false);
+        
         
     }
     return (

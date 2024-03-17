@@ -7,6 +7,7 @@ import PrimaryButton from "~/components/common/PrimaryButton";
 import TextInput from "~/components/common/TextInput";
 import { localStorageKeys } from "~/constants/keys";
 import { IUserSignUpViaEmail } from "~/types/api.interface";
+import { signupViaEmail } from "~/utils/api-requests/auth.requests";
 
 type SignupFormProps = {
     className?: string;
@@ -18,6 +19,8 @@ const SignupForm:React.FC<SignupFormProps> = ({
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(false);
+    const [showSubmitButtonLoader, setShowSubmitButtonLoader] = useState<boolean>(false);
     const router = useRouter();
 
     function onNameValueChange(name: string) {
@@ -35,24 +38,36 @@ const SignupForm:React.FC<SignupFormProps> = ({
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        setDisableSubmitButton(true);
+        setShowSubmitButtonLoader(true);
+
+        function enableSubmitButton() {
+            setDisableSubmitButton(false);
+            setShowSubmitButtonLoader(false);
+        }
+
         if(!name) {
             alert("Please enter your name");
+            enableSubmitButton();
             return;
         }
 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if(!email) {
             alert("Please enter your email");
+            enableSubmitButton();
             return;
         }
 
         if(!emailRegex.test(email)) {
             alert("Please enter a valid email");
+            enableSubmitButton();
             return;
         }
 
         if(!password) {
             alert("Please enter your password");
+            enableSubmitButton();
             return;
         }
 
@@ -79,6 +94,7 @@ const SignupForm:React.FC<SignupFormProps> = ({
                     must have at least 1 digit - ${hasAtleastOneNumber}
                 `
             );
+            enableSubmitButton();
             return;
         }
         
@@ -89,15 +105,7 @@ const SignupForm:React.FC<SignupFormProps> = ({
                 password: password
             };
     
-            const response = await fetch("api/auth/user/signup-email",
-                                        {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                                // 'Content-Type': 'application/x-www-form-urlencoded',
-                                            },
-                                            body: JSON.stringify(requestBody)
-                                        })
+            const response = await signupViaEmail(requestBody);
             console.log("response", response);
             window.localStorage.setItem(localStorageKeys.userEmail, email);
             router.push("/verify-email");
@@ -107,7 +115,11 @@ const SignupForm:React.FC<SignupFormProps> = ({
                 alert(`${error?.message}`);
             }
             
+        } finally {
+            enableSubmitButton();
         }
+
+        
 
         
     }
@@ -153,6 +165,8 @@ const SignupForm:React.FC<SignupFormProps> = ({
                     type="submit"
                     text="Create account"
                     className="w-[100%] mt-[40px]"
+                    disabled={disableSubmitButton}
+                    showLoader={showSubmitButtonLoader}
                 />
             </form>
 
