@@ -1,4 +1,5 @@
 import Checkbox from "./common/Checkbox";
+import Pagination from "./common/Pagination";
 
 type MarkInterestsFormProps = {
     className?: string;
@@ -22,6 +23,8 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
             <h5 className="text-[#000] text-[20px] font-[500] font-inter self-start ml-[60px] mt-[37px] " >My saved interests!</h5>
 
             <Checkbox text="Shoes" />
+
+            <Pagination count={20} />
         </div>
     )
 }

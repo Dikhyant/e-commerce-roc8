@@ -12,7 +12,7 @@ const config = {
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked"
   ],
-  /* "rules": {
+  "rules": {
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
@@ -37,7 +37,7 @@ const config = {
         }
       }
     ]
-  } */
+  },
   "overrides": [
     {
       "files": ["*-test.js","*.spec.js","**/*.ts","**/*.tsx","**/*.js"],
