@@ -38,5 +38,13 @@ const config = {
       }
     ]
   } */
+  "overrides": [
+    {
+      "files": ["*-test.js","*.spec.js","**/*.ts","**/*.tsx","**/*.js"],
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
 }
 module.exports = config;
