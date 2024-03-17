@@ -1,16 +1,15 @@
 import { NextPage } from "next";
-import SignupForm from "~/components/common/SignupForm";
+import VerifyEmailForm from "~/components/VerifyEmailForm";
 
-const Signup:NextPage = () => {
+const VerifyEmail:NextPage = () => {
     return (
         <main
             className="bg-[#ffffff13] w-screen h-screen flex  justify-center"
         >
-            <SignupForm
-                className="self-center"
+            <VerifyEmailForm
             />
         </main>
     )
 }
 
-export default Signup;
+export default VerifyEmail;

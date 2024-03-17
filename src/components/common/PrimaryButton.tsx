@@ -14,7 +14,7 @@ const PrimaryButton:React.FC<PrimaryButtonProps> = ({
     return (
         <button
             type="submit"
-            className={`w-[300px] h-[56px] bg-[#000] rounded-[6px] text-[#fff] hover:cursor-pointer
+            className={`w-full h-[56px] bg-[#000] rounded-[6px] text-[#fff] hover:cursor-pointer
                         ${className ? className : ""}
             `}
         >

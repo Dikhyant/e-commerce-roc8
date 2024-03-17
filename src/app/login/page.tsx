@@ -1,10 +1,7 @@
+import { NextPage } from "next";
 import LoginForm from "~/components/common/LoginForm";
 
-type LoginProps = {
-
-}
-
-const Login:React.FC<LoginProps> = () => {
+const Login:NextPage = () => {
     return (
         <main
             className="bg-[#ffffff13] w-screen h-screen flex  justify-center"

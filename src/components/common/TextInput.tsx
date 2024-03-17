@@ -22,7 +22,7 @@ const TextInput:React.FC<TextInputProps> = ({
 }) => {
     return (
         <div
-            className={`w-[350px] 
+            className={`w-full 
                         ${rootContainerClassName ? rootContainerClassName : ""}
             `}
         >
@@ -42,7 +42,6 @@ const TextInput:React.FC<TextInputProps> = ({
                 placeholder={ placeholder ? placeholder : "Enter"}
                 type={type ? type : "text"}
                 name={name ? name : ""}
-                
             />
         </div>
     )
