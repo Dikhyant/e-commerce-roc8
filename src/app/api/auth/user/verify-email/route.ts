@@ -4,6 +4,7 @@ import { IUserVerifyViaEmail } from "~/types/api.interface";
 import { IUser } from "~/types/entities";
 import bcrypt from "bcrypt";
 import { SERVER_MESSAGES } from "~/constants/server-messages";
+import jwt from "jsonwebtoken";
 
 export async function POST(request: NextRequest){
 
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest){
         } = reqBody
         console.log(otp);
 
-        const user:IUser = await db.user.findFirst({where: {email: email}}) as IUser;
+        let user:IUser = await db.user.findFirst({where: {email: email}}) as IUser;
 
         if(!(user?.verificationOtp && user?.verificationOtpExpiry)) {
             return NextResponse.json({error: SERVER_MESSAGES.INTERNAL_SERVER_ERROR}, {status: 500})
@@ -28,11 +29,22 @@ export async function POST(request: NextRequest){
         }
         console.log(user);
 
-        await db.user.update({where: {id: user.id}, data: {isVerified: true}})
+        user = await db.user.update({where: {id: user.id}, data: {isVerified: true}})
+
+        //create token data
+        const tokenData = {
+            id: user.id,
+            username: user.name,
+            email: user.email
+        }
+        //create token
+        const token = await jwt.sign(tokenData, process.env.USER_LOGIN_TOKEN_SECRET!, {expiresIn: "1d"})
         
         return NextResponse.json({
             message: "Email verified successfully",
             success: true
+        }).cookies.set("token", token, {
+            httpOnly: true, 
         })
 
 

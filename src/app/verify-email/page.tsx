@@ -7,6 +7,7 @@ const VerifyEmail:NextPage = () => {
             className="bg-[#ffffff13] w-screen h-screen flex  justify-center"
         >
             <VerifyEmailForm
+                className="self-start"
             />
         </main>
     )

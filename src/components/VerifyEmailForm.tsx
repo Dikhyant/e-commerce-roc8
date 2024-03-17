@@ -19,6 +19,8 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
     className
 }) => {
     const [otp, setOtp] = useState<string>("");
+    const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(false);
+    const [showSubmitButtonLoader, setShowSubmitButtonLoader] = useState<boolean>(false);
     const router = useRouter();
 
     function onOtpChange(otp: string) {
@@ -27,9 +29,13 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
 
     async function handleOtpSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setDisableSubmitButton(true);
+        setShowSubmitButtonLoader(true);
 
         if(otp.length < otpLength) {
             alert("Please enter the complete otp");
+            setDisableSubmitButton(false);
+            setShowSubmitButtonLoader(false);
             return;
         }
 
@@ -49,6 +55,8 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
             }
         }
 
+        setDisableSubmitButton(false);
+        setShowSubmitButtonLoader(false);
         
     }
     return (
@@ -78,6 +86,8 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
                     type="submit"
                     text="Verify"
                     className="w-[87%] mt-[64px] spin-button-none"
+                    disabled={disableSubmitButton}
+                    showLoader={showSubmitButtonLoader}
                 />
             </form>
             
