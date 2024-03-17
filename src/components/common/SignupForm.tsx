@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import { FormEvent } from "react";
 import PrimaryButton from "~/components/common/PrimaryButton";
 import TextInput from "~/components/common/TextInput";
 
@@ -11,6 +12,13 @@ type SignupFormProps = {
 const SignupForm:React.FC<SignupFormProps> = ({
     className,
 }) => {
+
+    async function onSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const response = await fetch("api/user/",{method: "POST"})
+        console.log("response", response);
+    }
+
     return (
         <div
             className={`border-[#C1C1C1] border-[1px] rounded-[20px] w-[600px] h-auto flex flex-col items-center pt-[40px] pb-[131px]
@@ -23,6 +31,7 @@ const SignupForm:React.FC<SignupFormProps> = ({
 
             <form
                 className={`w-[86%] mt-[32px]`}
+                onSubmit={onSubmit}
             >
                 <TextInput
                     name="Name"
@@ -45,6 +54,7 @@ const SignupForm:React.FC<SignupFormProps> = ({
                 />
 
                 <PrimaryButton
+                    type="submit"
                     text="Create account"
                     className="w-[100%] mt-[40px]"
                 />
