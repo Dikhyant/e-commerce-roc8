@@ -3,5 +3,7 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
-    isVerified: string;
+    isVerified: boolean;
+    verificationOtp?: string;
+    verificationOtpExpiry?: string;
 }

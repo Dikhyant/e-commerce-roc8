@@ -13,7 +13,9 @@ datasource db {
 model User {
     id String @id @default(uuid())
     name String
-    email String
+    email String @unique
     password String
     isVerified Boolean @default(false)
+    verificationOtp String @default("verify")
+    verificationOtpExpiry String @default("date")
 }

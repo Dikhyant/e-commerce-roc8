@@ -3,3 +3,13 @@ export interface IUserSignUpViaEmail {
     email: string;
     password: string;
 }
+
+export interface IUserLoginViaEmail {
+    email: string;
+    password: string;
+}
+
+export interface IUserVerifyViaEmail {
+    email: string;
+    otp: string;
+}

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "~/server/db";
 import { IUserSignUpViaEmail } from "~/types/api.interface";
 import bcrypt from "bcrypt";
+import { IUser } from "~/types/entities";
+import { generateOTP } from "~/utils/random-generator";
+import { sendVerificationOtp } from "~/utils/mailer";
 
 export async function POST(request: NextRequest, response: NextResponse) {
     
@@ -17,15 +20,27 @@ export async function POST(request: NextRequest, response: NextResponse) {
         const saltRound = 12;
         const salt = await bcrypt.genSalt(saltRound);
         const passwordHash = await bcrypt.hash(body?.password, salt);
-        const user = await db.user.create({
+        const otp = await generateOTP(8);
+        const otpHash = await bcrypt.hash(otp, salt);
+        const user:IUser = await db.user.create({
             data: {
                 name: body?.name,
                 email: body?.email,
                 password: passwordHash,
+                verificationOtp: otpHash,
+                verificationOtpExpiry: (Date.now() + 1000 * 60 * 60 * 24).toString()
             }
         });
-        return NextResponse.json({user: user})
+
+        
+        await sendVerificationOtp({
+            email: user.email,
+            otp
+        })
+        
+        return NextResponse.json({user: user},{status: 200})
     } catch (error) {
         console.error(error);
+        return NextResponse.json({message: error},{status: 400});
     }
 }
