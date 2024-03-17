@@ -1,14 +1,18 @@
 "use client"
-import { HTMLInputTypeAttribute } from "react";
+import { ChangeEvent, HTMLInputTypeAttribute, useState } from "react";
 
 type TextInputProps = {
     label?: string;
     labelClassName?: string;
     rootContainerClassName?: string;
     inputClassName?: string;
-    type?: HTMLInputTypeAttribute;
+    type?: "number" | "text" | "password" | "email" | "tel"//HTMLInputTypeAttribute;
     name?: string;
     placeholder?: string;
+    value?: string;
+    override?: boolean;
+    onChange?: ((e: ChangeEvent<HTMLInputElement>) => void);
+    onChangeText?: ((text: string) => void);
 }
 
 const TextInput:React.FC<TextInputProps> = ({
@@ -19,7 +23,25 @@ const TextInput:React.FC<TextInputProps> = ({
     type,
     name,
     placeholder,
+    value:propValue = "",
+    override = false,
+    onChange,
+    onChangeText,
 }) => {
+    const [value, setValue] = useState<string>(propValue);
+
+    function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+        if(onChange) {
+            onChange(e);
+        }
+
+        if(onChangeText) {
+            onChangeText(e.currentTarget.value);
+        }
+
+        setValue(e.currentTarget.value);
+    }
+
     return (
         <div
             className={`w-full 
@@ -42,6 +64,8 @@ const TextInput:React.FC<TextInputProps> = ({
                 placeholder={ placeholder ? placeholder : "Enter"}
                 type={type ? type : "text"}
                 name={name ? name : ""}
+                value={override ? propValue : value}
+                onChange={handleOnChange}
             />
         </div>
     )

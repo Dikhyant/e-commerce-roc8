@@ -5,12 +5,14 @@ type OtpInputProps = {
     numberOfDigits?: number;
     label?: string;
     className?: string;
+    onChangeOtp?: ((otp: string) => void);
 }
 
 const OtpInput:React.FC<OtpInputProps> = ({
     numberOfDigits = 6,
     label,
     className,
+    onChangeOtp,
 }) => {
     const [otp , setOtp] = useState<string[]>(new Array(numberOfDigits).fill(""));
     const [indexOfFocusedInput, setIndexOfFocusedInput] = useState<number>(0);
@@ -18,6 +20,9 @@ const OtpInput:React.FC<OtpInputProps> = ({
 
     useEffect(() => {
         console.log("otp ", otp);
+        if(onChangeOtp) {
+            onChangeOtp(otp.join(""));
+        }
     }, [otp]);
 
     useEffect(() => {

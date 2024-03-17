@@ -13,3 +13,8 @@ export interface IUserVerifyViaEmail {
     email: string;
     otp: string;
 }
+
+export interface ApiResponse<T> {
+    data: T;
+    message?: string;
+}

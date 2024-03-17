@@ -5,11 +5,13 @@ import bcrypt from "bcrypt";
 import { IUser } from "~/types/entities";
 import { generateOTP } from "~/utils/random-generator";
 import { sendVerificationOtp } from "~/utils/mailer";
+import { SERVER_MESSAGES } from "~/constants/server-messages";
 
 export async function POST(request: NextRequest, response: NextResponse) {
     
     try {
         const body: IUserSignUpViaEmail = await request.json();
+        console.log("body", body);
         if(
             !body?.name ||
             !body?.email ||
@@ -17,6 +19,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
         ) {
             throw new Error("Request body param missing");
         }
+
+        const u = await db.user.findUnique({where: {email: body.email}});
+        if(u) {
+            return NextResponse.json({message: SERVER_MESSAGES.USER_ALREAD_EXISTS}, {status: 403})
+        }
+
         const saltRound = 12;
         const salt = await bcrypt.genSalt(saltRound);
         const passwordHash = await bcrypt.hash(body?.password, salt);
