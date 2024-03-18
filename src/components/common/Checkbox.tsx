@@ -8,6 +8,7 @@ type CheckboxProps = {
     checked?: boolean;
     override?: boolean;
     text: string;
+    className?: string;
     onChange?: ((checked: boolean) => void);
     onCheckBoxClick?: (() => {});
 }
@@ -16,6 +17,7 @@ const Checkbox:React.FC<CheckboxProps> = ({
     checked: propChecked = false,
     override,
     text,
+    className,
     onChange,
     onCheckBoxClick,
 }) => {
@@ -50,7 +52,7 @@ const Checkbox:React.FC<CheckboxProps> = ({
         setChecked(_ => !_);
     }
     return (
-        <div className="flex items-center gap-x-[12px]" >
+        <div className={`flex items-center gap-x-[12px] ${className} `} >
             <button ref={buttonRef} className="w-[24px] h-[24px] overflow-hidden rounded-[4px]" onClick={onClick} >
             {
                 checked || (override && propChecked) ? (

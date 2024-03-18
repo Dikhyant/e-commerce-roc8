@@ -1,12 +1,17 @@
+import { ICategorySelectionCheck } from "~/types/api.interface";
 import Checkbox from "./common/Checkbox";
 import Pagination from "./common/Pagination";
 
 type MarkInterestsFormProps = {
     className?: string;
+    categoriesWithSelectionStatus?: ICategorySelectionCheck[];
+    onPageChange?: ((page: number) => void);
 }
 
 const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
     className,
+    categoriesWithSelectionStatus,
+    onPageChange,
 }) => {
     return (
         <div
@@ -22,9 +27,29 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
 
             <h5 className="text-[#000] text-[20px] font-[500] font-inter self-start ml-[60px] mt-[37px] " >My saved interests!</h5>
 
-            <Checkbox text="Shoes" />
+            <div className="flex flex-col gap-y-[12px]" >
+            {
+                categoriesWithSelectionStatus && categoriesWithSelectionStatus?.map((item, index) => {
+                    return (
+                        <Checkbox
+                            key={item?.id}
+                            text={item?.name}
+                            checked={item?.selected}
+                        />
+                    )
+                })
+            }
+            </div>
 
-            <Pagination count={20} />
+            <Pagination 
+                count={20} 
+                onPageChange={(page) => {
+                    if(onPageChange) {
+                        onPageChange(page);
+                    }
+                }} 
+                className="mt-[20px]"
+            />
         </div>
     )
 }
