@@ -9,8 +9,10 @@ import { getCategoriesWithSelectionStatus } from "~/utils/api-requests/categorie
 const MarkInterests:NextPage = () => {
     const [categoriesWithSelectionStatus, setCategoriesWithSelectionStatus] = useState<ICategorySelectionCheck[]>([]);
     const [pagination, setPagination] = useState<IPagination>({page: 1, limit: 6});
+    const [showLoadingCircleInMarkInterestForm, setShowLoadingCircleInMarkInterestForm] = useState<boolean>(false);
 
     useEffect(() => {
+        setShowLoadingCircleInMarkInterestForm(true);
         getCategoriesWithSelectionStatus(pagination)
         .then((data: ApiResponse<ICategorySelectionCheck[]>) => {
             console.log("data from getCategoriesWithSelectionStatus api", data);
@@ -18,6 +20,9 @@ const MarkInterests:NextPage = () => {
         })
         .catch(error => {
             console.error(error);
+        })
+        .finally(() => {
+            setShowLoadingCircleInMarkInterestForm(false);
         })
     }, [pagination]);
 
@@ -32,6 +37,8 @@ const MarkInterests:NextPage = () => {
                 className="self-start"
                 categoriesWithSelectionStatus={categoriesWithSelectionStatus}
                 onPageChange={onPageChange}
+                showLoadingCircle={showLoadingCircleInMarkInterestForm}
+                totalPageCount={17}
             />
         </main>
     )

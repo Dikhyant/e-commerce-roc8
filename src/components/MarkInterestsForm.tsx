@@ -1,16 +1,21 @@
 import { ICategorySelectionCheck } from "~/types/api.interface";
 import Checkbox from "./common/Checkbox";
 import Pagination from "./common/Pagination";
+import SpinningLoader from "./svg/SpinningLoader";
 
 type MarkInterestsFormProps = {
     className?: string;
     categoriesWithSelectionStatus?: ICategorySelectionCheck[];
+    showLoadingCircle?: boolean;
+    totalPageCount?: number;
     onPageChange?: ((page: number) => void);
 }
 
 const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
     className,
     categoriesWithSelectionStatus,
+    showLoadingCircle,
+    totalPageCount,
     onPageChange,
 }) => {
     return (
@@ -27,7 +32,7 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
 
             <h5 className="text-[#000] text-[20px] font-[500] font-inter self-start ml-[60px] mt-[37px] " >My saved interests!</h5>
 
-            <div className="flex flex-col gap-y-[12px]" >
+            <div className="flex flex-col items-start gap-y-[25px] self-start w-[75%] ml-[60px] mt-[28px] relative" >
             {
                 categoriesWithSelectionStatus && categoriesWithSelectionStatus?.map((item, index) => {
                     return (
@@ -39,16 +44,27 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
                     )
                 })
             }
+            {
+                showLoadingCircle ? (
+                    <div className="absolute w-full h-full bg-[#e1e1e1d2] z-[2px] flex items-center justify-center" >
+                        <SpinningLoader
+                            // className="absolute self-center justify-self-center"
+                            width={50}
+                            height={50}
+                        />
+                    </div>
+                ) : (<></>)
+            }
             </div>
 
             <Pagination 
-                count={20} 
+                count={totalPageCount ? totalPageCount : 20} 
                 onPageChange={(page) => {
                     if(onPageChange) {
                         onPageChange(page);
                     }
                 }} 
-                className="mt-[20px]"
+                className="mt-[68px] self-start ml-[60px]"
             />
         </div>
     )
