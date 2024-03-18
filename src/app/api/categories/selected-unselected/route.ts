@@ -30,16 +30,16 @@ export async function GET(request: NextRequest) {
                 c.id AS category_id,
                 c.name AS category_name,
                 CASE 
-                    WHEN uc.user_id IS NULL THEN '${dbConstants.NOT_SELECTED}'
-                    ELSE '${dbConstants.SELECTED}'
+                    WHEN uc.user_id IS NULL THEN ${dbConstants.NOT_SELECTED}
+                    ELSE ${dbConstants.SELECTED}
                 END AS selection_status
             FROM 
                 "Category" c
             LEFT JOIN 
-                "UserCategory" uc ON c.id = uc.category_id AND uc.user_id = '${userId}' 
-                LIMIT ${limit}
-                OFFSET ${offset};
-
+                "UserCategory" uc ON c.id = uc.category_id AND uc.user_id = ${userId}
+            ORDER BY c.id
+            LIMIT ${limit}
+            OFFSET ${offset};
         `
 
         const formattedResult:ICategorySelectionCheck[] = []
