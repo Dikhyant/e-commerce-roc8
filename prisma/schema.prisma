@@ -18,4 +18,20 @@ model User {
     isVerified Boolean @default(false)
     verificationOtp String @default("verify")
     verificationOtpExpiry String @default("date")
+    categories UserCategory[]
+}
+
+model Category {
+    id String @id @default(uuid())
+    name String
+    users UserCategory[]
+}
+
+model UserCategory {
+  user_id String
+  category_id String
+  user User @relation(fields: [user_id], references: [id])
+  category Category @relation(fields: [category_id], references: [id])
+
+  @@id([user_id, category_id])
 }

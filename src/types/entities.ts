@@ -7,3 +7,9 @@ export interface IUser {
     verificationOtp?: string;
     verificationOtpExpiry?: string;
 }
+
+export interface IUserCategory_Selection_Status {
+    category_id: string;
+    category_name: string;
+    selection_status: string;
+}

@@ -14,7 +14,21 @@ export interface IUserVerifyViaEmail {
     otp: string;
 }
 
+export interface ICategory {
+    id: string;
+    name: string;
+}
+
+export interface ICategorySelectionCheck extends ICategory {
+    selected: boolean;
+}
+
 export interface ApiResponse<T> {
     data: T;
     message?: string;
+}
+
+export interface IPagination {
+    page: number;
+    limit: number;
 }
