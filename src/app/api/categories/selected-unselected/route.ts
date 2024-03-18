@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConstants } from "~/constants/db";
 import { db } from "~/server/db";
-import { ApiResponse, ICategorySelectionCheck } from "~/types/api.interface";
+import { ApiResponse, ICategorySelectionCheck, IAlterCategories_SelectionStatus } from "~/types/api.interface";
 import { AuthTokenData } from "~/types/common";
 import { IUserCategory_Selection_Status } from "~/types/entities";
+import { ApiResponseError } from "~/utils/http";
 import { getDecodedJWTToken } from "~/utils/token";
 
 export async function GET(request: NextRequest) {
@@ -65,5 +66,51 @@ export async function GET(request: NextRequest) {
             code: 400
         }
         return NextResponse.json(errorResponse)
+    }
+}
+
+export async function PATCH(request: NextRequest) {
+    try {
+        const body:IAlterCategories_SelectionStatus = await request.json();
+        if(!(body?.categories && body?.categories?.length > 0)) {
+            throw new Error("No category was provided");
+        }
+
+        const token = request.cookies.get("token")?.value || '';
+        const decodedToken: AuthTokenData = getDecodedJWTToken<AuthTokenData>(token);
+        const userId = decodedToken?.id ? decodedToken?.id : "";
+        const addEntries = await db.userCategory.createMany({
+            data: body.categories.filter(item => item.selected).map(item => ({category_id: item.id, user_id: userId}))
+        })
+
+        const deletedEntries = await db.userCategory.deleteMany({
+            where: {
+                AND: [
+                {
+                    user_id: userId
+                },
+                {
+                    category_id: {
+                    in: body.categories.filter(item => !item.selected).map(item => item.id)
+                    }
+                }
+                ]
+            }
+        });
+
+        const responseData:ApiResponse<any> = {
+            data: {
+                addEntries,
+                deletedEntries
+            },
+            message: "Succesfully changed selection state of categories"
+        }
+
+        return NextResponse.json(responseData)
+    } catch (error) {
+        return NextResponse.json({
+            message: error,
+            code: 400
+        })
     }
 }

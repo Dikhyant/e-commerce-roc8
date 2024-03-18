@@ -34,4 +34,5 @@ model UserCategory {
   category Category @relation(fields: [category_id], references: [id])
 
   @@id([user_id, category_id])
+  @@unique([user_id, category_id])
 }
