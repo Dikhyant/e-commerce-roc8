@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import CheckboxChecked from "../svg/CheckboxChecked";
 import { Dimension } from "~/types/common";
+import { usePreventInitialEffect } from "~/hooks/common";
 
 type CheckboxProps = {
     checked?: boolean;
@@ -39,7 +40,7 @@ const Checkbox:React.FC<CheckboxProps> = ({
         }
     }, [buttonRef]);
 
-    useEffect(() => {
+    usePreventInitialEffect(() => {
         if(onChange) {
             onChange(checked);
         }

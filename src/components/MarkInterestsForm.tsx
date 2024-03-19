@@ -9,6 +9,7 @@ type MarkInterestsFormProps = {
     showLoadingCircle?: boolean;
     totalPageCount?: number;
     onPageChange?: ((page: number) => void);
+    onCategoryCheckBoxChange?: ((id: string, checked: boolean) => void);
 }
 
 const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
@@ -17,6 +18,7 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
     showLoadingCircle,
     totalPageCount,
     onPageChange,
+    onCategoryCheckBoxChange,
 }) => {
     return (
         <div
@@ -40,6 +42,11 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
                             key={item?.id}
                             text={item?.name}
                             checked={item?.selected}
+                            onChange={(checked) => {
+                                if(onCategoryCheckBoxChange) {
+                                    onCategoryCheckBoxChange(item?.id, checked);
+                                }
+                            }}
                         />
                     )
                 })

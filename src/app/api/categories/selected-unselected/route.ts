@@ -83,25 +83,20 @@ export async function PATCH(request: NextRequest) {
             data: body.categories.filter(item => item.selected).map(item => ({category_id: item.id, user_id: userId}))
         })
 
-        const deletedEntries = await db.userCategory.deleteMany({
-            where: {
-                AND: [
-                {
-                    user_id: userId
-                },
-                {
-                    category_id: {
-                    in: body.categories.filter(item => !item.selected).map(item => item.id)
-                    }
-                }
-                ]
-            }
-        });
+        const categoryIdsToDelete = body.categories.filter(item => !item.selected).map(item => item.id);
+        const formattedArrayOfCategoriestToBeDeleted = categoryIdsToDelete.map(item => `\'${item}\'`);
+
+        const deleteResult = await db.$queryRawUnsafe(`
+            DELETE FROM "UserCategory"
+            WHERE (user_id, category_id) IN (
+                SELECT \'${userId}\' AS user_id, unnest(ARRAY[${formattedArrayOfCategoriestToBeDeleted}]) AS category_id
+            )
+        `)
 
         const responseData:ApiResponse<any> = {
             data: {
                 addEntries,
-                deletedEntries
+                deleteResult
             },
             message: "Succesfully changed selection state of categories"
         }
@@ -111,6 +106,6 @@ export async function PATCH(request: NextRequest) {
         return NextResponse.json({
             message: error,
             code: 400
-        })
+        },{status: 400})
     }
 }
