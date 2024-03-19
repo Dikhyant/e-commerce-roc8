@@ -7,7 +7,7 @@ const Login:NextPage = () => {
             className="bg-[#ffffff13] w-screen h-screen flex  justify-center"
         >
             <LoginForm
-                className="self-center"
+                className="self-start"
             />
         </main>
     )

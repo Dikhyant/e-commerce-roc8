@@ -115,17 +115,18 @@ const LoginForm:React.FC<LoginFormProps> = ({
     
     return (
         <div
-            className={`border-[#C1C1C1] border-[1px] rounded-[20px] w-[600px] h-auto flex flex-col items-center pt-[40px] pb-[51px]
+            className={`border-[#C1C1C1] border-[1px] rounded-[20px] text-[2.222vw] max-[500px]:text-[5vw] h-auto flex flex-col items-center pt-[40px] pb-[51px]
+                        max-[400px]:w-[80vw] max-sm:w-[70vw] w-[50vw]
                         ${className ? className : ""}
             `}
         >
             <h3
-                className="text-[#000] font-[600] text-[32px]"
+                className="text-[#000] font-[600] text-[1em]"
             >Login</h3>
 
-            <h4 className="text-[#000] text-[24px] font-[400] mt-[36px]" >Welcome back to ECOMMERCE</h4>
+            <h4 className="text-[#000] text-[0.75em] font-[400] mt-[36px]" >Welcome back to ECOMMERCE</h4>
 
-            <h6 className="text-[#000] text-[16px] font-[400] mt-[13px]" >The next gen business marketplace</h6>
+            <h6 className="text-[#000] text-[0.5em] font-[400] mt-[13px]" >The next gen business marketplace</h6>
 
             <form
                 className={`w-[86%] mt-[32px]`}
@@ -138,6 +139,8 @@ const LoginForm:React.FC<LoginFormProps> = ({
                     type="email"
                     rootContainerClassName="w-[100%]"
                     onChangeText={onEmailValueChange}
+                    labelClassName="text-[0.5em]"
+                    inputClassName="text-[0.5em] max-[500px]:h-[40px]"
                 />
 
                 <TextInput
@@ -146,12 +149,14 @@ const LoginForm:React.FC<LoginFormProps> = ({
                     type="password"
                     rootContainerClassName="w-[100%] mt-[32px]"
                     onChangeText={onPassordValueChange}
+                    labelClassName="text-[0.5em]"
+                    inputClassName="text-[0.5em] max-[500px]:h-[40px]"
                 />
 
                 <PrimaryButton
                     text="Login"
                     type="submit"
-                    className="w-[100%] mt-[40px]"
+                    className="w-[100%] mt-[40px] text-[0.5em] max-[500px]:h-[40px]"
                     disabled={disableSubmitButton}
                     showLoader={showSubmitButtonLoader}
                 />
@@ -159,7 +164,7 @@ const LoginForm:React.FC<LoginFormProps> = ({
 
             <div className="bg-[#C1C1C1] w-[86%] h-[1px] mt-[29px]" ></div>
 
-            <div className="mt-[31px]" >
+            <div className="mt-[31px] text-[0.5em]" >
                 <span className="text-[#333333] text-[16px] font-[400]" >Don’t have an Account? </span>
                 <Link className="text-[#000000] text-[16px] font-[500]" href="/signup" >SIGN UP</Link>
             </div>
