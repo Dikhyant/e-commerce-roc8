@@ -14,7 +14,9 @@ const MarkInterests:NextPage = () => {
     const [alteredCategores, setAlteredCategores] = useState<ICategorySelectionCheck[]>([]);
 
     const updateCategoriesDebouce = useDebounce(() => {
-        const catPayload:ICategorySelectionCheck[] = []
+        if(alteredCategores.length === 0) return;
+
+        const catPayload:ICategorySelectionCheck[] = [];
         for(const altCat of alteredCategores) {
             const obj = categoriesWithSelectionStatus.find(item => item.id === altCat.id);
             if(obj?.selected !== altCat.selected) {
@@ -33,29 +35,13 @@ const MarkInterests:NextPage = () => {
 
         updateCategoresSelectionStatus(requestBody)
         .then(data => {
-            console.log("response from updateCategoresSelectionStatus", data);
-            // setAlteredCategores([]);
-            const newCat = [...categoriesWithSelectionStatus];
-            for(const altCat of alteredCategores) {
-                for(const nc of newCat) {
-                    if(nc.id === altCat.id) {
-                        nc.selected = altCat?.selected ?? false
-                    }
-                }
-            }
-
-            /* for(let i = 0; i < alteredCategores.length; i++) {
-                const id = alteredCategores[i]?.id
-                for(let j = 0; j < newCat.length; j++) {
-                    if(newCat[i]?.id === id) {
-                        (newCat[i] as ICategorySelectionCheck).selected = (alteredCategores[i] as ICategorySelectionCheck )?.selected
-                    }
-                }
-            } */
-            setCategoriesWithSelectionStatus(newCat);
+            console.log("response from updateCategoresSelectionStatus", data); 
         })
         .catch(error => {
             console.error(error);
+        })
+        .finally(() => {
+            setAlteredCategores([]);
         })
     }, 2000, [alteredCategores, categoriesWithSelectionStatus])
 

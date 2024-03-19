@@ -12,7 +12,11 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value || ''
 
   if(isPublicPath && token) {
-    return NextResponse.redirect(new URL(`/${pageRoutes.markInterests}`, request.nextUrl))
+    return NextResponse.redirect(new URL(`/${pageRoutes.markInterests}`, request.nextUrl));
+  }
+
+  if(isPublicPath && !token) {
+    return NextResponse.redirect(new URL(`/${pageRoutes.login}`, request.nextUrl));
   }
 
   if (!isPublicPath && !token) {
@@ -22,5 +26,5 @@ export function middleware(request: NextRequest) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/((?!api|_next|static|public|favicon.ico).*)',
+  matcher: `/((?!login|api|_next/static|_next/image|favicon.ico).*)`,
 }

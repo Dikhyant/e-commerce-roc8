@@ -91,12 +91,15 @@ export async function PATCH(request: NextRequest) {
         const categoryIdsToDelete = body.categories.filter(item => !item.selected).map(item => item.id);
         const formattedArrayOfCategoriestToBeDeleted = categoryIdsToDelete.map(item => `\'${item}\'`);
 
-        await db.$queryRawUnsafe(`
-            DELETE FROM "UserCategory"
-            WHERE (user_id, category_id) IN (
-                SELECT \'${userId}\' AS user_id, unnest(ARRAY[${formattedArrayOfCategoriestToBeDeleted}]) AS category_id
-            )
-        `)
+        if(formattedArrayOfCategoriestToBeDeleted.length > 0) {
+            await db.$queryRawUnsafe(`
+                DELETE FROM "UserCategory"
+                WHERE (user_id, category_id) IN (
+                    SELECT \'${userId}\' AS user_id, unnest(ARRAY[${formattedArrayOfCategoriestToBeDeleted}]) AS category_id
+                )
+            `)
+        }
+        
 
         const responseData:ApiResponse<string> = {
             data: "Done",
