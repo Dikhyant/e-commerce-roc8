@@ -4,6 +4,8 @@ email - xiveh53023@darkse.com ; password - Password123
 email - jeyido3968@irnini.com ; password - Password123
 email - yeyanal811@irnini.com ; password - Password123
 
+To logout just clear cookie section of the browser
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
