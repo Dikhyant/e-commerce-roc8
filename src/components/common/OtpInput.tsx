@@ -5,6 +5,8 @@ type OtpInputProps = {
     numberOfDigits?: number;
     label?: string;
     className?: string;
+    labelClassName?: string;
+    inputBlockClassName?: string;
     onChangeOtp?: ((otp: string) => void);
 }
 
@@ -12,6 +14,8 @@ const OtpInput:React.FC<OtpInputProps> = ({
     numberOfDigits = 6,
     label,
     className,
+    labelClassName,
+    inputBlockClassName,
     onChangeOtp,
 }) => {
     const [otp , setOtp] = useState<string[]>(new Array(numberOfDigits).fill(""));
@@ -81,7 +85,7 @@ const OtpInput:React.FC<OtpInputProps> = ({
         >
             {
                 label ? (
-                    <h6 className="text-[#000] text-[16px] font-[400]" >{label}</h6>
+                    <h6 className={`text-[#000] text-[16px] font-[400] ${labelClassName ?? ""} `} >{label}</h6>
                 ) : (<></>)
             }
             <div
@@ -94,7 +98,7 @@ const OtpInput:React.FC<OtpInputProps> = ({
                                 key={index}
                                 type="tel"
                                 className={`aspect-[46/48] w-[46px] border-[#C1C1C1] border-[1px] 
-                                            rounded-[6px] side-button-none text-center`}
+                                            rounded-[6px] side-button-none text-center ${inputBlockClassName ?? ""}`}
                                 ref={index === indexOfFocusedInput ? refOfFocusedInput : null}
                                 value={otp[index]}
                                 onChange={onInputChange}

@@ -63,15 +63,16 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
     }
     return (
         <div
-            className={`border-[#C1C1C1] border-[1px] rounded-[20px] w-[600px] h-auto flex flex-col items-center pt-[40px] pb-[131px]
+            className={`border-[#C1C1C1] border-[1px] rounded-[20px] text-[2.222vw] max-[500px]:text-[5vw] h-auto flex flex-col items-center pt-[40px] pb-[131px]
+                        max-[400px]:w-[80vw] max-sm:w-[70vw] w-[50vw]
                         ${className ? className : ""}
             `}
         >
             <h3
-                className="text-[#000] font-[600] text-[32px]"
+                className="text-[#000] font-[600] text-[1em]"
             >Verify your email</h3>
 
-            <h6 className="text-[#000] text-[16px] font-[400] mt-[13px]" >
+            <h6 className="text-[#000] text-[0.5em] font-[400] mt-[13px]" >
                 {`Enter the 8 digit code you have received on\n`}<span className="font-[500]" >swa***@gmail.com</span></h6>
 
             <form
@@ -81,13 +82,15 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
                     label="Code"
                     numberOfDigits={otpLength}
                     className="mt-[46px]"
+                    labelClassName="!text-[0.5em]"
+                    inputBlockClassName="!aspect-[46/48] !w-[3.194vw] max-[500px]:!w-[20px]"
                     onChangeOtp={onOtpChange}
                 />
 
                 <PrimaryButton
                     type="submit"
                     text="Verify"
-                    className="w-[87%] mt-[64px] spin-button-none"
+                    className="w-[87%] mt-[64px] spin-button-none text-[0.5em] max-[500px]:h-[40px]"
                     disabled={disableSubmitButton}
                     showLoader={showSubmitButtonLoader}
                 />
