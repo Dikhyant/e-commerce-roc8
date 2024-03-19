@@ -3,6 +3,7 @@ import HeaderNavButton from "~/components/common/HeaderNavButton";
 
 import { Inter } from "next/font/google";
 import Header from "~/components/common/Header";
+import DiscountBar from "~/components/common/DiscountBar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,6 +51,8 @@ export default function RootLayout({
       <body className={`font-sans ${inter.variable}`}>
         <Header
           headerNavButtonsData={headerNavButtons}
+        />
+        <DiscountBar
         />
         {children}</body>
     </html>

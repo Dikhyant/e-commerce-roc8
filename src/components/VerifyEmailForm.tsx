@@ -72,8 +72,8 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
                 className="text-[#000] font-[600] text-[1em]"
             >Verify your email</h3>
 
-            <h6 className="text-[#000] text-[0.5em] font-[400] mt-[13px]" >
-                {`Enter the 8 digit code you have received on\n`}<span className="font-[500]" >swa***@gmail.com</span></h6>
+            <h6 className="text-[#000] text-[0.5em] font-[400] mt-[13px] w-auto text-center self-center" >
+                {`Enter the 8 digit code you have received on`}<br/><span className="font-[500]" >swa***@gmail.com</span></h6>
 
             <form
                 onSubmit={handleOtpSubmit}
