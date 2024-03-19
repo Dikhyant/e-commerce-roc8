@@ -7,4 +7,4 @@ export const getCategoriesWithSelectionStatus = async (data: IPagination = {page
 http.get<ApiResponse<ICategorySelectionCheck[]>>(`${BASE_URL}/selected-unselected?page=${data.page}&limit=${data.limit}`);
 
 export const updateCategoresSelectionStatus = async (data: IAlterCategories_SelectionStatus) => 
-http.patch<ApiResponse<any>>(`${BASE_URL}/selected-unselected`, data);
+http.patch<ApiResponse<string>>(`${BASE_URL}/selected-unselected`, data);

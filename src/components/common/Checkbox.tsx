@@ -1,3 +1,4 @@
+/* eslint no-use-before-define: 0 */  // --> OFF
 "use client"
 
 import { useEffect, useRef, useState } from "react";

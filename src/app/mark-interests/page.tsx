@@ -1,12 +1,11 @@
 "use client"
 
 import { NextPage } from "next";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MarkInterestsForm from "~/components/MarkInterestsForm";
 import { useDebounce, usePreventInitialEffect } from "~/hooks/common";
 import { ApiResponse, IAlterCategories_SelectionStatus, ICategorySelectionCheck, IPagination } from "~/types/api.interface";
 import { getCategoriesWithSelectionStatus, updateCategoresSelectionStatus } from "~/utils/api-requests/categories.requests";
-import { debounce } from "~/utils/common";
 
 const MarkInterests:NextPage = () => {
     const [categoriesWithSelectionStatus, setCategoriesWithSelectionStatus] = useState<ICategorySelectionCheck[]>([]);
@@ -16,14 +15,20 @@ const MarkInterests:NextPage = () => {
 
     const updateCategoriesDebouce = useDebounce(() => {
         const catPayload:ICategorySelectionCheck[] = []
-        for(let i = 0; i < alteredCategores.length; i++) {
+        for(const altCat of alteredCategores) {
+            const obj = categoriesWithSelectionStatus.find(item => item.id === altCat.id);
+            if(obj?.selected !== altCat.selected) {
+                catPayload.push(altCat);
+            }
+        }
+        /* for(let i = 0; i < alteredCategores.length; i++) {
             const id = alteredCategores[i]?.id;
             const obj = categoriesWithSelectionStatus.find(item => item.id === id);
             if(obj?.selected !== alteredCategores[i]?.selected && alteredCategores[i]) {
                 // there is a change and needs to be sent to backend
                 catPayload.push(alteredCategores[i] as ICategorySelectionCheck);
             }
-        }
+        } */
         const requestBody: IAlterCategories_SelectionStatus = {categories: catPayload};
 
         updateCategoresSelectionStatus(requestBody)
@@ -31,21 +36,26 @@ const MarkInterests:NextPage = () => {
             console.log("response from updateCategoresSelectionStatus", data);
             // setAlteredCategores([]);
             const newCat = [...categoriesWithSelectionStatus];
-            for(let i = 0; i < alteredCategores.length; i++) {
+            for(const altCat of alteredCategores) {
+                for(const nc of newCat) {
+                    if(nc.id === altCat.id) {
+                        nc.selected = altCat?.selected ?? false
+                    }
+                }
+            }
+
+            /* for(let i = 0; i < alteredCategores.length; i++) {
                 const id = alteredCategores[i]?.id
                 for(let j = 0; j < newCat.length; j++) {
                     if(newCat[i]?.id === id) {
                         (newCat[i] as ICategorySelectionCheck).selected = (alteredCategores[i] as ICategorySelectionCheck )?.selected
                     }
                 }
-            }
+            } */
             setCategoriesWithSelectionStatus(newCat);
         })
         .catch(error => {
             console.error(error);
-        })
-        .finally(() => {
-            
         })
     }, 2000, [alteredCategores, categoriesWithSelectionStatus])
 
@@ -75,7 +85,7 @@ const MarkInterests:NextPage = () => {
     function onCategoryCheckBoxChanged(id: string, checked: boolean) {
 
         setAlteredCategores(prev => {
-            let newState = [...prev];
+            const newState = [...prev];
             const index = newState.findIndex(item => item.id === id);
             if(index === -1) {
                 newState.push({
