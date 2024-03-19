@@ -1,7 +1,8 @@
 Login credientials
 
 email - xiveh53023@darkse.com ; password - Password123
-emali - jeyido3968@irnini.com ; password - Password123
+email - jeyido3968@irnini.com ; password - Password123
+email - yeyanal811@irnini.com ; password - Password123
 
 # Create T3 App
 

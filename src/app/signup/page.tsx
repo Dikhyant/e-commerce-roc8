@@ -4,7 +4,7 @@ import SignupForm from "~/components/common/SignupForm";
 const Signup:NextPage = () => {
     return (
         <main
-            className="bg-[#ffffff13] w-screen h-auto flex  justify-center pb-[33px]"
+            className="bg-[#ffffff13] w-screen h-auto flex  justify-center pb-[33px] pt-[40px]"
         >
             <SignupForm
                 className="self-start"
