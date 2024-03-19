@@ -9,7 +9,7 @@ import { SERVER_MESSAGES } from "~/constants/server-messages";
 export async function POST(request: NextRequest){
     try {
 
-        const reqBody:IUserLoginViaEmail = await request.json()
+        const reqBody:IUserLoginViaEmail = await request.json() as IUserLoginViaEmail
         const {email, password} = reqBody;
         console.log(reqBody);
 
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest){
             email: user.email
         }
         //create token
-        const token = await jwt.sign(tokenData, process.env.USER_LOGIN_TOKEN_SECRET!, {expiresIn: "1d"})
+        const token = jwt.sign(tokenData, process.env.USER_LOGIN_TOKEN_SECRET!, {expiresIn: "1d"})
 
         const response = NextResponse.json({
             message: "Login successful",
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest){
         })
         return response;
 
-    } catch (error: any) {
-        return NextResponse.json({error: error.message}, {status: 500})
+    } catch (error) {
+        return NextResponse.json({error: error}, {status: 500})
     }
 }

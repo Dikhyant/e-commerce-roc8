@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 export async function POST(request: NextRequest){
 
     try {
-        const reqBody:IUserVerifyViaEmail = await request.json()
+        const reqBody:IUserVerifyViaEmail = await request.json() as IUserVerifyViaEmail
         const { 
             email,
             otp
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest){
             email: user.email
         }
         //create token
-        const token = await jwt.sign(tokenData, process.env.USER_LOGIN_TOKEN_SECRET!, {expiresIn: "1d"})
+        const token = jwt.sign(tokenData, process.env.USER_LOGIN_TOKEN_SECRET!, {expiresIn: "1d"})
 
         const response = NextResponse.json({
             message: "Email verified successfully",
@@ -52,8 +52,8 @@ export async function POST(request: NextRequest){
         return response
 
 
-    } catch (error:any) {
-        return NextResponse.json({error: error.message}, {status: 500})
+    } catch (error) {
+        return NextResponse.json({error: error}, {status: 500})
     }
 
 }

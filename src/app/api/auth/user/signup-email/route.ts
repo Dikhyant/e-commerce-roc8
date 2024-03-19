@@ -7,10 +7,10 @@ import { generateOTP } from "~/utils/random-generator";
 import { sendVerificationOtp } from "~/utils/mailer";
 import { SERVER_MESSAGES } from "~/constants/server-messages";
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
     
     try {
-        const body: IUserSignUpViaEmail = await request.json();
+        const body: IUserSignUpViaEmail = await request.json() as IUserSignUpViaEmail;
         console.log("body", body);
         if(
             !body?.name ||
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         const saltRound = 12;
         const salt = await bcrypt.genSalt(saltRound);
         const passwordHash = await bcrypt.hash(body?.password, salt);
-        const otp = await generateOTP(8);
+        const otp = generateOTP(8);
         const otpHash = await bcrypt.hash(otp, salt);
         const user:IUser = await db.user.create({
             data: {
