@@ -14,7 +14,7 @@ const Header:React.FC<HeaderProps> = ({
 }) => {
     return (
         <header
-            className={`w-full h-[100px] bg-[#fff] flex items-center text-[16px]`}
+            className={`w-full h-[100px] bg-[#fff] flex items-center text-[1.111vw] px-[40px]`}
         >
             <h1
                 className="text-[#000] font-[700] text-[2em]"

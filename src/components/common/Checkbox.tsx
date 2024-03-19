@@ -10,6 +10,7 @@ type CheckboxProps = {
     override?: boolean;
     text: string;
     className?: string;
+    textClassName?: string;
     onChange?: ((checked: boolean) => void);
     onCheckBoxClick?: (() => {});
 }
@@ -19,6 +20,7 @@ const Checkbox:React.FC<CheckboxProps> = ({
     override,
     text,
     className,
+    textClassName,
     onChange,
     onCheckBoxClick,
 }) => {
@@ -61,7 +63,7 @@ const Checkbox:React.FC<CheckboxProps> = ({
                 ) : (<div className={`bg-[#CCCCCC] w-full h-full`} ></div>)
             }
             </button>
-            <h6 className={`text-[#000000] text-[16px] font-[400] font-inter`} >{text}</h6>
+            <h6 className={`text-[#000000] text-[16px] font-[400] font-inter ${textClassName ? textClassName : ""}`} >{text}</h6>
         </div>
     )
 }

@@ -22,17 +22,18 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
 }) => {
     return (
         <div
-            className={`border-[#C1C1C1] border-[1px] rounded-[20px] w-[600px] h-auto flex flex-col items-center pt-[40px] pb-[131px]
+            className={`border-[#C1C1C1] border-[1px] rounded-[20px] text-[2.222vw] max-[500px]:text-[5vw] h-auto flex flex-col items-center pt-[40px] pb-[131px]
+                        max-[400px]:w-[80vw] max-sm:w-[70vw] w-[50vw]
                     ${className ? className : ""}
             `}
         >
             <h3
-                className="text-[#000] font-[600] font-inter text-[32px]"
+                className="text-[#000] font-[600] font-inter text-[1em]"
             >Please mark your interests!</h3>
 
-            <h6 className="text-[#000] text-[16px] font-[400] font-inter mt-[13px]" >We will keep you notified.</h6>
+            <h6 className="text-[#000] text-[0.5em] font-[400] font-inter mt-[13px]" >We will keep you notified.</h6>
 
-            <h5 className="text-[#000] text-[20px] font-[500] font-inter self-start ml-[60px] mt-[37px] " >My saved interests!</h5>
+            <h5 className="text-[#000] text-[0.625em] font-[500] font-inter self-start ml-[60px] mt-[37px] " >My saved interests!</h5>
 
             <div className="flex flex-col items-start gap-y-[25px] self-start w-[75%] ml-[60px] mt-[28px] relative" >
             {
@@ -47,6 +48,7 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
                                     onCategoryCheckBoxChange(item?.id, checked);
                                 }
                             }}
+                            textClassName="text-[0.5em]"
                         />
                     )
                 })
@@ -71,7 +73,7 @@ const MarkInterestsForm:React.FC<MarkInterestsFormProps> = ({
                         onPageChange(page);
                     }
                 }} 
-                className="mt-[68px] self-start ml-[60px]"
+                className="mt-[68px] self-start ml-[60px] text-[0.625em]"
             />
         </div>
     )

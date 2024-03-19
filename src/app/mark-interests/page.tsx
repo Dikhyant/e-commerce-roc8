@@ -94,7 +94,7 @@ const MarkInterests:NextPage = () => {
     }
     return (
         <main
-            className="bg-[#ffffff13] w-screen h-screen flex  justify-center"
+            className=" w-screen h-screen flex  justify-center"
         >
             <MarkInterestsForm
                 className="self-start"
