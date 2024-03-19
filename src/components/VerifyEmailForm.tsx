@@ -1,12 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import OtpInput from "~/components/common/OtpInput";
 import PrimaryButton from "~/components/common/PrimaryButton";
 import { localStorageKeys } from "~/constants/keys";
 import { pageRoutes } from "~/constants/page-routes";
 import { verifyEmail } from "~/utils/api-requests/auth.requests";
+import { partiallyHideEmail } from "~/utils/common";
 import { ApiResponseError } from "~/utils/http";
 
 type VerifyEmailFormProps = {
@@ -21,7 +22,16 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
     const [otp, setOtp] = useState<string>("");
     const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(false);
     const [showSubmitButtonLoader, setShowSubmitButtonLoader] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>("xiveh53023@darkse.com");
     const router = useRouter();
+
+    useEffect(() => {
+        const email = window.localStorage.getItem(localStorageKeys.userEmail) as string
+        if(email) {
+            setEmail(email);
+        }
+        
+    }, []);
 
     function onOtpChange(otp: string) {
         setOtp(otp);
@@ -39,7 +49,7 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
             return;
         }
 
-        const email = window.localStorage.getItem(localStorageKeys.userEmail) as string
+        // const email = window.localStorage.getItem(localStorageKeys.userEmail) as string
 
         try {
             const response = await verifyEmail({
@@ -73,7 +83,7 @@ const VerifyEmailForm:React.FC<VerifyEmailFormProps> = ({
             >Verify your email</h3>
 
             <h6 className="text-[#000] text-[0.5em] font-[400] mt-[13px] w-auto text-center self-center" >
-                {`Enter the 8 digit code you have received on`}<br/><span className="font-[500]" >swa***@gmail.com</span></h6>
+                {`Enter the 8 digit code you have received on`}<br/><span className="font-[500]" >{partiallyHideEmail(email)}</span></h6>
 
             <form
                 onSubmit={handleOtpSubmit}

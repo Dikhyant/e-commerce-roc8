@@ -30,3 +30,19 @@ export function debounce<F extends AnyFunction>(
     }
   };
 }
+
+export function partiallyHideEmail(email: string): string {
+  if(!email) return email;
+
+  const emailParts = email.split("@");
+  let emailFirstPart = emailParts[0]?.split('');
+  if(!emailFirstPart) return email;
+
+  for(let i = emailFirstPart?.length - 1; i > 2; i--) {
+    emailFirstPart[i] = "*";
+  }
+
+  emailParts[0] = emailFirstPart.join("")
+
+  return emailParts.join("@");
+}
