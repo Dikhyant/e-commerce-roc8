@@ -165,8 +165,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ className }) => {
           type="submit"
           text="Create account"
           className="mt-[40px] w-[100%] text-[0.5em] max-[500px]:h-[40px]"
-          isDisabled={isSubmitButtonDisabled}
-          isLoaderVisible={isSubmitButtonLoaderVisible}
+          isDisabled={!!isSubmitButtonDisabled}
+          isLoaderVisible={!!isSubmitButtonLoaderVisible}
         />
       </form>
 

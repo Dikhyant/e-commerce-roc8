@@ -35,7 +35,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       }}
     >
       {text ? text : ""}
-      {isLoaderVisible ? (
+      {!!isLoaderVisible ? (
         <SpinningLoader
           width={30}
           height={30}

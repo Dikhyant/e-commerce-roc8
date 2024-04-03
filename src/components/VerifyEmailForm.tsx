@@ -97,8 +97,8 @@ const VerifyEmailForm: React.FC<VerifyEmailFormProps> = ({ className }) => {
           type="submit"
           text="Verify"
           className="spin-button-none mt-[64px] w-[87%] text-[0.5em] max-[500px]:h-[40px]"
-          isDisabled={disableSubmitButton}
-          isLoaderVisible={showSubmitButtonLoader}
+          isDisabled={!!disableSubmitButton}
+          isLoaderVisible={!!showSubmitButtonLoader}
         />
       </form>
     </div>

@@ -62,7 +62,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder ? placeholder : "Enter"}
         type={type ? type : "text"}
         name={name ? name : ""}
-        value={isOverridden ? propValue : value}
+        value={!!isOverridden ? propValue : value}
         onChange={handleOnChange}
       />
     </div>

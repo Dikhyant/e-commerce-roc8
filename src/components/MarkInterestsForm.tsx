@@ -55,7 +55,7 @@ const MarkInterestsForm: React.FC<MarkInterestsFormProps> = ({
             />
           );
         })}
-        {isLoadingCircleVisible ? (
+        {!!isLoadingCircleVisible ? (
           <div className="absolute z-[2px] flex h-full w-full items-center justify-center bg-[#e1e1e1d2]">
             <SpinningLoader
               // className="absolute self-center justify-self-center"

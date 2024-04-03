@@ -62,7 +62,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         className={cn("h-[24px] w-[24px] overflow-hidden rounded-[4px]")}
         onClick={onClick}
       >
-        {isChecked || (isOverridden && propIsChecked) ? (
+        {!!isChecked || (isOverridden && propIsChecked) ? (
           <CheckboxChecked
             width={buttonSize.width}
             height={buttonSize.height}

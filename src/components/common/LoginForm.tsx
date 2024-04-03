@@ -153,8 +153,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
           text="Login"
           type="submit"
           className="mt-[40px] w-[100%] text-[0.5em] max-[500px]:h-[40px]"
-          isDisabled={isSubmitButtonDisabled}
-          isLoaderVisible={isSubmitButtonLoaderVisible}
+          isDisabled={!!isSubmitButtonDisabled}
+          isLoaderVisible={!!isSubmitButtonLoaderVisible}
         />
       </form>
 
