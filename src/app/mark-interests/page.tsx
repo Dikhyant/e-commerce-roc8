@@ -44,13 +44,13 @@ const MarkInterests: NextPage = () => {
         }
       }
       /* for(let i = 0; i < alteredCategores.length; i++) {
-                        const id = alteredCategores[i]?.id;
-                        const obj = categoriesWithSelectionStatus.find(item => item.id === id);
-                        if(obj?.selected !== alteredCategores[i]?.selected && alteredCategores[i]) {
-                            // there is a change and needs to be sent to backend
-                            catPayload.push(alteredCategores[i] as ICategorySelectionCheck);
-                        }
-                    } */
+                              const id = alteredCategores[i]?.id;
+                              const obj = categoriesWithSelectionStatus.find(item => item.id === id);
+                              if(obj?.selected !== alteredCategores[i]?.selected && alteredCategores[i]) {
+                                  // there is a change and needs to be sent to backend
+                                  catPayload.push(alteredCategores[i] as ICategorySelectionCheck);
+                              }
+                          } */
       const requestBody: IAlterCategories_SelectionStatus = {
         categories: catPayload,
       };
@@ -123,7 +123,7 @@ const MarkInterests: NextPage = () => {
         className="self-start"
         categoriesWithSelectionStatus={categoriesWithSelectionStatus}
         onPageChange={onPageChange}
-        showLoadingCircle={showLoadingCircleInMarkInterestForm}
+        isLoadingCircleVisible={showLoadingCircleInMarkInterestForm}
         totalPageCount={17}
         onCategoryCheckBoxChange={onCategoryCheckBoxChanged}
       />

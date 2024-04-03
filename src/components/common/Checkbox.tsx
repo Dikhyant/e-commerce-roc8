@@ -7,25 +7,25 @@ import { usePreventInitialEffect } from "~/hooks/common";
 import { cn } from "~/utils/misc";
 
 interface CheckboxProps {
-  checked?: boolean;
-  override?: boolean;
+  isChecked?: boolean;
+  isOverridden?: boolean;
   text: string;
   className?: string;
   textClassName?: string;
-  onChange?: (checked: boolean) => void;
-  onCheckBoxClick?: () => {};
+  onChange?: (isChecked: boolean) => void;
+  onCheckBoxClick?: () => void;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
-  checked: propChecked = false,
-  override,
+  isChecked: propIsChecked = false,
+  isOverridden,
   text,
   className,
   textClassName,
   onChange,
   onCheckBoxClick,
 }) => {
-  const [checked, setChecked] = useState<boolean>(propChecked);
+  const [isChecked, setIsChecked] = useState<boolean>(propIsChecked);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [buttonSize, setButtonSize] = useState<Dimension>({
     width: 20,
@@ -44,15 +44,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   usePreventInitialEffect(() => {
     if (onChange) {
-      onChange(checked);
+      onChange(isChecked);
     }
-  }, [checked]);
+  }, [isChecked]);
 
   function onClick() {
     if (onCheckBoxClick) {
       onCheckBoxClick();
     }
-    setChecked((_) => !_);
+    setIsChecked((_) => !_);
   }
 
   return (
@@ -62,7 +62,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         className={cn("h-[24px] w-[24px] overflow-hidden rounded-[4px]")}
         onClick={onClick}
       >
-        {checked || (override && propChecked) ? (
+        {isChecked || (isOverridden && propIsChecked) ? (
           <CheckboxChecked
             width={buttonSize.width}
             height={buttonSize.height}

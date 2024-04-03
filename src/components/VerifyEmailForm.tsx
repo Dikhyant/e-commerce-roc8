@@ -26,9 +26,7 @@ const VerifyEmailForm: React.FC<VerifyEmailFormProps> = ({ className }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const email = window.localStorage.getItem(
-      localStorageKeys.userEmail,
-    )!;
+    const email = window.localStorage.getItem(localStorageKeys.userEmail)!;
     if (email) {
       setEmail(email);
     }
@@ -99,8 +97,8 @@ const VerifyEmailForm: React.FC<VerifyEmailFormProps> = ({ className }) => {
           type="submit"
           text="Verify"
           className="spin-button-none mt-[64px] w-[87%] text-[0.5em] max-[500px]:h-[40px]"
-          disabled={disableSubmitButton}
-          showLoader={showSubmitButtonLoader}
+          isDisabled={disableSubmitButton}
+          isLoaderVisible={showSubmitButtonLoader}
         />
       </form>
     </div>

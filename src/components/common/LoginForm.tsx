@@ -18,9 +18,9 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [disableSubmitButton, setDisableSubmitButton] =
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] =
     useState<boolean>(false);
-  const [showSubmitButtonLoader, setShowSubmitButtonLoader] =
+  const [isSubmitButtonLoaderVisible, setIsSubmitButtonLoaderVisible] =
     useState<boolean>(false);
   const router = useRouter();
 
@@ -35,12 +35,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setDisableSubmitButton(true);
-    setShowSubmitButtonLoader(true);
+    setIsSubmitButtonDisabled(true);
+    setIsSubmitButtonLoaderVisible(true);
 
     function enableSubmitButton() {
-      setDisableSubmitButton(false);
-      setShowSubmitButtonLoader(false);
+      setIsSubmitButtonDisabled(false);
+      setIsSubmitButtonLoaderVisible(false);
     }
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -153,8 +153,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
           text="Login"
           type="submit"
           className="mt-[40px] w-[100%] text-[0.5em] max-[500px]:h-[40px]"
-          disabled={disableSubmitButton}
-          showLoader={showSubmitButtonLoader}
+          isDisabled={isSubmitButtonDisabled}
+          isLoaderVisible={isSubmitButtonLoaderVisible}
         />
       </form>
 

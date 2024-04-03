@@ -11,7 +11,7 @@ interface TextInputProps {
   name?: string;
   placeholder?: string;
   value?: string;
-  override?: boolean;
+  isOverridden?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeText?: (text: string) => void;
 }
@@ -25,7 +25,7 @@ const TextInput: React.FC<TextInputProps> = ({
   name,
   placeholder,
   value: propValue = "",
-  override = false,
+  isOverridden = false,
   onChange,
   onChangeText,
 }) => {
@@ -62,7 +62,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder ? placeholder : "Enter"}
         type={type ? type : "text"}
         name={name ? name : ""}
-        value={override ? propValue : value}
+        value={isOverridden ? propValue : value}
         onChange={handleOnChange}
       />
     </div>
