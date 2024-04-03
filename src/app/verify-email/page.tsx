@@ -1,16 +1,12 @@
 import { NextPage } from "next";
 import VerifyEmailForm from "~/components/VerifyEmailForm";
 
-const VerifyEmail:NextPage = () => {
-    return (
-        <main
-            className="bg-[#ffffff13] w-screen h-screen flex  justify-center pt-[40px]"
-        >
-            <VerifyEmailForm
-                className="self-start"
-            />
-        </main>
-    )
-}
+const VerifyEmail: NextPage = () => {
+  return (
+    <main className="flex h-screen w-screen justify-center  bg-[#ffffff13] pt-[40px]">
+      <VerifyEmailForm className="self-start" />
+    </main>
+  );
+};
 
 export default VerifyEmail;

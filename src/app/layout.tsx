@@ -12,7 +12,7 @@ const inter = Inter({
 
 type HeaderNavButtonProps = React.ComponentProps<typeof HeaderNavButton>;
 
-const headerNavButtons:HeaderNavButtonProps[] = [
+const headerNavButtons: HeaderNavButtonProps[] = [
   {
     label: "Categories",
     href: "/categories",
@@ -33,7 +33,7 @@ const headerNavButtons:HeaderNavButtonProps[] = [
     label: "Trending",
     href: "/trending",
   },
-]
+];
 
 export const metadata = {
   title: "E-com",
@@ -49,12 +49,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <Header
-          headerNavButtonsData={headerNavButtons}
-        />
-        <DiscountBar
-        />
-        {children}</body>
+        <Header headerNavButtonsData={headerNavButtons} />
+        <DiscountBar />
+        {children}
+      </body>
     </html>
   );
 }

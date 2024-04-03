@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import PrimaryButton from "~/components/common/PrimaryButton";
 import TextInput from "~/components/common/TextInput";
@@ -9,182 +9,180 @@ import { localStorageKeys } from "~/constants/keys";
 import { IUserSignUpViaEmail } from "~/types/api.interface";
 import { signupViaEmail } from "~/utils/api-requests/auth.requests";
 
-type SignupFormProps = {
-    className?: string;
+interface SignupFormProps {
+  className?: string;
 }
 
-const SignupForm:React.FC<SignupFormProps> = ({
-    className,
-}) => {
-    const [name, setName] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(false);
-    const [showSubmitButtonLoader, setShowSubmitButtonLoader] = useState<boolean>(false);
-    const router = useRouter();
+const SignupForm: React.FC<SignupFormProps> = ({ className }) => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [disableSubmitButton, setDisableSubmitButton] =
+    useState<boolean>(false);
+  const [showSubmitButtonLoader, setShowSubmitButtonLoader] =
+    useState<boolean>(false);
+  const router = useRouter();
 
-    function onNameValueChange(name: string) {
-        setName(name);
+  function onNameValueChange(name: string) {
+    setName(name);
+  }
+
+  function onEmailValueChange(email: string) {
+    setEmail(email);
+  }
+
+  function onPassordValueChange(password: string) {
+    setPassword(password);
+  }
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    setDisableSubmitButton(true);
+    setShowSubmitButtonLoader(true);
+
+    function enableSubmitButton() {
+      setDisableSubmitButton(false);
+      setShowSubmitButtonLoader(false);
     }
 
-    function onEmailValueChange(email: string) {
-        setEmail(email);
+    if (!name) {
+      alert("Please enter your name");
+      enableSubmitButton();
+      return;
     }
 
-    function onPassordValueChange(password: string) {
-        setPassword(password);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email) {
+      alert("Please enter your email");
+      enableSubmitButton();
+      return;
     }
 
-    async function onSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email");
+      enableSubmitButton();
+      return;
+    }
 
-        setDisableSubmitButton(true);
-        setShowSubmitButtonLoader(true);
+    if (!password) {
+      alert("Please enter your password");
+      enableSubmitButton();
+      return;
+    }
 
-        function enableSubmitButton() {
-            setDisableSubmitButton(false);
-            setShowSubmitButtonLoader(false);
-        }
+    const lowerCaseRegex = /[a-z]/g;
+    const upperCaseRegex = /[A-Z]/g;
+    const digitCaseRegex = /[0-9]/g;
 
-        if(!name) {
-            alert("Please enter your name");
-            enableSubmitButton();
-            return;
-        }
+    const isAtleastEightCharLong: boolean = password.length >= 8 ? true : false;
+    const hasAtleastOneLowerCaseLetter: boolean = lowerCaseRegex.test(password);
+    const hasAtleastOneUpperCaseLetter: boolean = upperCaseRegex.test(password);
+    const hasAtleastOneNumber: boolean = digitCaseRegex.test(password);
 
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if(!email) {
-            alert("Please enter your email");
-            enableSubmitButton();
-            return;
-        }
-
-        if(!emailRegex.test(email)) {
-            alert("Please enter a valid email");
-            enableSubmitButton();
-            return;
-        }
-
-        if(!password) {
-            alert("Please enter your password");
-            enableSubmitButton();
-            return;
-        }
-
-        const lowerCaseRegex = /[a-z]/g;
-        const upperCaseRegex = /[A-Z]/g;
-        const digitCaseRegex = /[0-9]/g;
-
-        let isAtleastEightCharLong:boolean = password.length >= 8 ? true : false;
-        let hasAtleastOneLowerCaseLetter:boolean = lowerCaseRegex.test(password);
-        let hasAtleastOneUpperCaseLetter:boolean = upperCaseRegex.test(password);
-        let hasAtleastOneNumber:boolean = digitCaseRegex.test(password);
-
-        if(!(
-            isAtleastEightCharLong &&
-            hasAtleastOneLowerCaseLetter &&
-            hasAtleastOneUpperCaseLetter &&
-            hasAtleastOneNumber
-        )) {
-            alert(
-                `
+    if (
+      !(
+        isAtleastEightCharLong &&
+        hasAtleastOneLowerCaseLetter &&
+        hasAtleastOneUpperCaseLetter &&
+        hasAtleastOneNumber
+      )
+    ) {
+      alert(
+        `
                     minimum characters 8 - ${isAtleastEightCharLong}\n
                     must have at least 1 lowercase letter - ${hasAtleastOneLowerCaseLetter}\n
                     must have at least 1 uppercase letter - ${hasAtleastOneUpperCaseLetter}\n
                     must have at least 1 digit - ${hasAtleastOneNumber}
-                `
-            );
-            enableSubmitButton();
-            return;
-        }
-        
-        try {
-            const requestBody:IUserSignUpViaEmail = {
-                name: name,
-                email: email,
-                password: password
-            };
-    
-            const response = await signupViaEmail(requestBody);
-            console.log("response", response);
-            window.localStorage.setItem(localStorageKeys.userEmail, email);
-            router.push("/verify-email");
-        } catch (error: any) {
-            console.error(error);
-            if(error?.message) {
-                alert(`${error?.message}`);
-            }
-            
-        } finally {
-            enableSubmitButton();
-        }
-
-        
-
-        
+                `,
+      );
+      enableSubmitButton();
+      return;
     }
 
-    return (
-        <div
-            className={`border-[#C1C1C1] border-[1px] rounded-[20px] text-[2.222vw] max-[500px]:text-[5vw] h-auto flex flex-col items-center 
-                        pt-[40px] pb-[131px] max-[500px]:pb-[50px]
-                        max-[400px]:w-[80vw] max-sm:w-[70vw] w-[50vw]
+    try {
+      const requestBody: IUserSignUpViaEmail = {
+        name: name,
+        email: email,
+        password: password,
+      };
+
+      const response = await signupViaEmail(requestBody);
+      console.log("response", response);
+      window.localStorage.setItem(localStorageKeys.userEmail, email);
+      router.push("/verify-email");
+    } catch (error: any) {
+      console.error(error);
+      if (error?.message) {
+        alert(`${error?.message}`);
+      }
+    } finally {
+      enableSubmitButton();
+    }
+  }
+
+  return (
+    <div
+      className={`flex h-auto w-[50vw] flex-col items-center rounded-[20px] border-[1px] border-[#C1C1C1] pb-[131px] 
+                        pt-[40px] text-[2.222vw] max-sm:w-[70vw]
+                        max-[500px]:pb-[50px] max-[500px]:text-[5vw] max-[400px]:w-[80vw]
                         ${className ? className : ""}
             `}
+    >
+      <h3 className="text-[1em] font-[600] text-[#000]">Create your account</h3>
+
+      <form className={`mt-[32px] w-[86%]`} onSubmit={onSubmit}>
+        <TextInput
+          name="Name"
+          label="Name"
+          rootContainerClassName="w-[100%]"
+          onChangeText={onNameValueChange}
+          labelClassName="text-[0.5em]"
+          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+        />
+
+        <TextInput
+          name="Email"
+          label="Email"
+          type="email"
+          rootContainerClassName="w-[100%] mt-[32px]"
+          onChangeText={onEmailValueChange}
+          labelClassName="text-[0.5em]"
+          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+        />
+
+        <TextInput
+          name="Password"
+          label="Password"
+          type="password"
+          rootContainerClassName="w-[100%] mt-[32px]"
+          onChangeText={onPassordValueChange}
+          labelClassName="text-[0.5em]"
+          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+        />
+
+        <PrimaryButton
+          type="submit"
+          text="Create account"
+          className="mt-[40px] w-[100%] text-[0.5em] max-[500px]:h-[40px]"
+          disabled={disableSubmitButton}
+          showLoader={showSubmitButtonLoader}
+        />
+      </form>
+
+      <div className="mt-[48px]">
+        <span className="text-[0.5em] font-[400] text-[#333333]">
+          Have an Account?{" "}
+        </span>
+        <Link
+          className="text-[0.5em] font-[500] text-[#000000]"
+          href={"/login"}
         >
-            <h3
-                className="text-[#000] font-[600] text-[1em]"
-            >Create your account</h3>
-
-            <form
-                className={`w-[86%] mt-[32px]`}
-                onSubmit={onSubmit}
-            >
-                <TextInput
-                    name="Name"
-                    label="Name"
-                    rootContainerClassName="w-[100%]"
-                    onChangeText={onNameValueChange}
-                    labelClassName="text-[0.5em]"
-                    inputClassName="text-[0.5em] max-[500px]:h-[40px]"
-                />
-
-                <TextInput
-                    name="Email"
-                    label="Email"
-                    type="email"
-                    rootContainerClassName="w-[100%] mt-[32px]"
-                    onChangeText={onEmailValueChange}
-                    labelClassName="text-[0.5em]"
-                    inputClassName="text-[0.5em] max-[500px]:h-[40px]"
-                />
-
-                <TextInput
-                    name="Password"
-                    label="Password"
-                    type="password"
-                    rootContainerClassName="w-[100%] mt-[32px]"
-                    onChangeText={onPassordValueChange}
-                    labelClassName="text-[0.5em]"
-                    inputClassName="text-[0.5em] max-[500px]:h-[40px]"
-                />
-
-                <PrimaryButton
-                    type="submit"
-                    text="Create account"
-                    className="w-[100%] mt-[40px] text-[0.5em] max-[500px]:h-[40px]"
-                    disabled={disableSubmitButton}
-                    showLoader={showSubmitButtonLoader}
-                />
-            </form>
-
-            <div className="mt-[48px]" >
-                <span className="text-[#333333] text-[0.5em] font-[400]" >Have an Account? </span>
-                <Link className="text-[#000000] text-[0.5em] font-[500]" href={"/login"} >LOGIN</Link>
-            </div>
-            
-        </div>
-    )
-}
+          LOGIN
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default SignupForm;

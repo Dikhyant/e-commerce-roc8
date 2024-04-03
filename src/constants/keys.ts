@@ -1,3 +1,3 @@
 export const localStorageKeys = {
-    userEmail: "user-email",
-}
+  userEmail: "user-email",
+};

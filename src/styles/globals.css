@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 .side-button-none::-webkit-outer-spin-button,
 .side-button-none::-webkit-inner-spin-button {
-  display: none;
-  -webkit-appearance: none;
-  margin: 0;
+    display: none;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 @tailwind base;
