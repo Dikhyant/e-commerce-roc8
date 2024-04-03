@@ -2,6 +2,7 @@
 
 import React from "react";
 import SpinningLoader from "../svg/SpinningLoader";
+import { cn } from "~/utils/misc";
 
 interface PrimaryButtonProps {
   text: string;
@@ -24,10 +25,11 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     <button
       disabled={disabled}
       type={type ? type : "button"}
-      className={`relative flex h-[56px] w-full items-center justify-center rounded-[6px] text-[#fff]
-                        ${disabled ? "bg-[#626262]" : "bg-[#000]"}
-                        ${className ? className : ""}
-            `}
+      className={cn(
+        "relative flex h-[56px] w-full items-center justify-center rounded-[6px] text-[#fff]",
+        disabled ? "bg-[#626262]" : "bg-[#000]",
+        className,
+      )}
       onClick={(e) => {
         if (onClick) onClick(e);
       }}

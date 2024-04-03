@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import CheckboxChecked from "../svg/CheckboxChecked";
 import { Dimension } from "~/types/common";
 import { usePreventInitialEffect } from "~/hooks/common";
+import { cn } from "~/utils/misc";
 
 interface CheckboxProps {
   checked?: boolean;
@@ -55,10 +56,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
   }
 
   return (
-    <div className={`flex items-center gap-x-[12px] ${className} `}>
+    <div className={cn("flex items-center gap-x-[12px]", className)}>
       <button
         ref={buttonRef}
-        className="h-[24px] w-[24px] overflow-hidden rounded-[4px]"
+        className={cn("h-[24px] w-[24px] overflow-hidden rounded-[4px]")}
         onClick={onClick}
       >
         {checked || (override && propChecked) ? (
@@ -67,11 +68,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
             height={buttonSize.height}
           />
         ) : (
-          <div className={`h-full w-full bg-[#CCCCCC]`}></div>
+          <div className={cn("h-full w-full bg-[#CCCCCC]")}></div>
         )}
       </button>
       <h6
-        className={`font-inter text-[16px] font-[400] text-[#000000] ${textClassName ? textClassName : ""}`}
+        className={cn(
+          "font-inter text-[16px] font-[400] text-[#000000]",
+          textClassName ?? textClassName,
+        )}
       >
         {text}
       </h6>

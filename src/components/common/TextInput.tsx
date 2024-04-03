@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent, useState } from "react";
+import { cn } from "~/utils/misc";
 
 interface TextInputProps {
   label?: string;
@@ -43,16 +44,10 @@ const TextInput: React.FC<TextInputProps> = ({
   }
 
   return (
-    <div
-      className={`w-full 
-                        ${rootContainerClassName ? rootContainerClassName : ""}
-            `}
-    >
+    <div className={cn("w-full ", rootContainerClassName)}>
       {label ? (
         <h6
-          className={`text-[16px] font-[400] text-[#000]
-                                    ${labelClassName ? labelClassName : ""}
-                        `}
+          className={cn("text-[16px] font-[400] text-[#000]", labelClassName)}
         >
           {label}
         </h6>
@@ -60,9 +55,10 @@ const TextInput: React.FC<TextInputProps> = ({
         <></>
       )}
       <input
-        className={`h-[48px] w-full rounded-[6px] border-[1px] border-[#C1C1C1] pl-[16px] placeholder:text-[#848484]
-                            ${inputClassName ? inputClassName : ""}
-                `}
+        className={cn(
+          "h-[48px] w-full rounded-[6px] border-[1px] border-[#C1C1C1] pl-[16px] placeholder:text-[#848484]",
+          inputClassName,
+        )}
         placeholder={placeholder ? placeholder : "Enter"}
         type={type ? type : "text"}
         name={name ? name : ""}

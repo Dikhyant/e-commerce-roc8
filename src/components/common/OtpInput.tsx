@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { cn } from "~/utils/misc";
 
 interface OtpInputProps {
   numberOfDigits?: number;
@@ -86,10 +87,10 @@ const OtpInput: React.FC<OtpInputProps> = ({
   }
 
   return (
-    <div className={`${className ? className : ""}`}>
+    <div className={cn(className)}>
       {label ? (
         <h6
-          className={`text-[16px] font-[400] text-[#000] ${labelClassName ?? ""} `}
+          className={cn("text-[16px] font-[400] text-[#000]", labelClassName)}
         >
           {label}
         </h6>
@@ -102,8 +103,10 @@ const OtpInput: React.FC<OtpInputProps> = ({
             <input
               key={index}
               type="tel"
-              className={`side-button-none aspect-[46/48] w-[46px] rounded-[6px] 
-                                            border-[1px] border-[#C1C1C1] text-center ${inputBlockClassName ?? ""}`}
+              className={cn(
+                "side-button-none aspect-[46/48] w-[46px] rounded-[6px] border-[1px] border-[#C1C1C1] text-center",
+                inputBlockClassName,
+              )}
               ref={index === indexOfFocusedInput ? refOfFocusedInput : null}
               value={otp[index]}
               onChange={onInputChange}

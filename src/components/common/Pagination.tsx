@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { cn } from "~/utils/misc";
 
 interface PaginationProps {
   count: number;
@@ -47,7 +48,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div
-      className={`flex items-center gap-x-[10px] font-inter ${className ? className : ""}`}
+      className={cn("flex items-center gap-x-[10px] font-inter ", className)}
     >
       <button
         className="text-[20px] font-[500] text-[#ACACAC]"
@@ -68,9 +69,10 @@ const Pagination: React.FC<PaginationProps> = ({
         const isCurrentPage = index + 1 === page;
         return (
           <button
-            className={` text-[20px] font-[500]
-                                            ${isCurrentPage ? "text-[#000]" : "text-[#ACACAC]"}
-                                            `}
+            className={cn(
+              "text-[20px] font-[500]",
+              isCurrentPage ? "text-[#000]" : "text-[#ACACAC]",
+            )}
             key={index}
             onClick={() => {
               onPageClick(index + 1);

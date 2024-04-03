@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cn } from "~/utils/misc";
 
 interface HeaderNavButtonProps {
   label: string;
@@ -13,9 +14,10 @@ const HeaderNavButton: React.FC<HeaderNavButtonProps> = ({
 }) => {
   return (
     <Link
-      className={`text-[13px] font-[600] text-[#000]
-                          ${className ? className : ""}
-        `}
+      className={cn(
+        "text-[13px] font-[600] text-[#000]",
+        className ? className : "",
+      )}
       href={href}
     >
       {label}
