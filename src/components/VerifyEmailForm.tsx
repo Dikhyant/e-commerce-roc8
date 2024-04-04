@@ -75,9 +75,11 @@ const VerifyEmailForm: React.FC<VerifyEmailFormProps> = ({ className }) => {
                         ${className ? className : ""}
             `}
     >
-      <h3 className="text-[1em] font-[600] text-[#000]">Verify your email</h3>
+      <h3 className="text-[32px] font-[600] leading-[38.73px] text-[#000]">
+        Verify your email
+      </h3>
 
-      <h6 className="mt-[13px] w-auto self-center text-center text-[0.5em] font-[400] text-[#000]">
+      <h6 className="mt-[32px] w-auto self-center text-center text-[16px] font-[400] text-[#000]">
         {`Enter the 8 digit code you have received on`}
         <br />
         <span className="font-[500]">{partiallyHideEmail(email)}</span>
@@ -88,15 +90,15 @@ const VerifyEmailForm: React.FC<VerifyEmailFormProps> = ({ className }) => {
           label="Code"
           numberOfDigits={otpLength}
           className="mt-[46px]"
-          labelClassName="!text-[0.5em]"
-          inputBlockClassName="!aspect-[46/48] !w-[3.194vw] max-[500px]:!w-[20px]"
+          labelClassName="!text-[16px]"
+          inputBlockClassName="!aspect-[46/48] w-[46px] max-sm:!w-[20px]"
           onChangeOtp={onOtpChange}
         />
 
         <PrimaryButton
           type="submit"
           text="Verify"
-          className="spin-button-none mt-[64px] w-[87%] text-[0.5em] max-[500px]:h-[40px]"
+          className="spin-button-none mt-[64px] w-[456px] text-[16px] font-[500] max-sm:w-11/12"
           isDisabled={!!disableSubmitButton}
           isLoaderVisible={!!showSubmitButtonLoader}
         />

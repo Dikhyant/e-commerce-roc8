@@ -10,13 +10,13 @@ const DiscountBar: React.FC = () => {
     >
       <Chevron //left chevron
       />
-      <label
+      <div
         className={cn(
-          "mx-[14px] text-[0.972vw] font-[500] max-[500px]:text-[4vw]",
+          "ml-[24px] mr-[20px] text-[14px] font-[500] leading-[16.94px]",
         )}
       >
         Get 10% off on business sign up
-      </label>
+      </div>
       <Chevron
         className={cn("rotate-180")} // right chevron
       />

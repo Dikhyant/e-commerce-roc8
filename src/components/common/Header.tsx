@@ -12,47 +12,53 @@ type HeaderNavButtonProps = React.ComponentProps<typeof HeaderNavButton>;
 
 const Header: React.FC<HeaderProps> = ({ headerNavButtonsData }) => {
   return (
-    <header
-      className={cn(
-        "flex h-[100px] w-full items-center bg-[#fff] px-[40px] text-[1.111vw]",
-      )}
-    >
-      <h1 className={cn("text-[2em] font-[700] text-[#000]")}>ECOMMERCE</h1>
+    <header>
+      <div className="flex items-center justify-end gap-x-[20px] px-[40px] py-[12px] text-[12px] font-[400] leading-[14.52px] text-[#333333]">
+        <button>Help</button>
+        <button>Orders & Returns</button>
+        <button>Hi, John</button>
+      </div>
+      <div className="flex w-full items-center justify-between bg-[#fff] px-[40px] pb-[18px] pt-[7px]">
+        <h1
+          className={cn("text-[32px] font-[700] leading-[38.73px] text-[#000]")}
+        >
+          ECOMMERCE
+        </h1>
 
-      <div className="grow"></div>
+        <div className="hidden items-center gap-x-[32px] md:flex">
+          {headerNavButtonsData && headerNavButtonsData?.length > 0 ? (
+            headerNavButtonsData.map((item, index) => {
+              return (
+                <HeaderNavButton
+                  key={item?.href}
+                  label={item?.label}
+                  href={item?.href}
+                  className={cn(
+                    "text-[16px] font-[600] leading-[19.36px] text-[#000000]",
+                  )}
+                />
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </div>
 
-      {headerNavButtonsData && headerNavButtonsData?.length > 0 ? (
-        headerNavButtonsData.map((item, index) => {
-          return (
-            <HeaderNavButton
-              key={item?.href}
-              label={item?.label}
-              href={item?.href}
-              className={cn(
-                "text-[1em]",
-                index < headerNavButtonsData.length - 1 ? "mr-[32px]" : "",
-              )}
+        <div className="flex gap-x-[32px]">
+          <button>
+            <Image src={SearchIcon} alt="search-icon" width={20} height={20} />
+          </button>
+
+          <button>
+            <Image
+              src={ShoppingCartIcon}
+              alt="search-icon"
+              width={20}
+              height={20}
             />
-          );
-        })
-      ) : (
-        <></>
-      )}
-
-      <div className="grow"></div>
-
-      <button className="mr-[32px]">
-        <Image src={SearchIcon} alt="search-icon" width={20} height={20} />
-      </button>
-
-      <button>
-        <Image
-          src={ShoppingCartIcon}
-          alt="search-icon"
-          width={20}
-          height={20}
-        />
-      </button>
+          </button>
+        </div>
+      </div>
     </header>
   );
 };

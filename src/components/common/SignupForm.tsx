@@ -129,55 +129,49 @@ const SignupForm: React.FC<SignupFormProps> = ({ className }) => {
         className,
       )}
     >
-      <h3 className="text-[1em] font-[600] text-[#000]">Create your account</h3>
+      <h3 className="text-[32px] font-[600] leading-[38.73px] text-[#000]">
+        Create your account
+      </h3>
 
       <form className="mt-[32px] w-[86%]" onSubmit={onSubmit}>
         <TextInput
           name="Name"
           label="Name"
-          rootContainerClassName="w-[100%]"
+          rootContainerClassName="w-[456px] max-sm:w-full"
           onChangeText={onNameValueChange}
-          labelClassName="text-[0.5em]"
-          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+          inputClassName="h-[48px] "
         />
 
         <TextInput
           name="Email"
           label="Email"
           type="email"
-          rootContainerClassName="w-[100%] mt-[32px]"
+          rootContainerClassName="w-[456px] max-sm:w-full mt-[32px]"
           onChangeText={onEmailValueChange}
-          labelClassName="text-[0.5em]"
-          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+          inputClassName="h-[48px] "
         />
 
         <TextInput
           name="Password"
           label="Password"
           type="password"
-          rootContainerClassName="w-[100%] mt-[32px]"
+          rootContainerClassName="w-[456px] max-sm:w-full mt-[32px]"
           onChangeText={onPassordValueChange}
-          labelClassName="text-[0.5em]"
-          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+          inputClassName="h-[48px] "
         />
 
         <PrimaryButton
           type="submit"
-          text="Create account"
-          className="mt-[40px] w-[100%] text-[0.5em] max-[500px]:h-[40px]"
+          text="CREATE ACCOUNT"
+          className="mt-[40px] w-[100%] text-[16px]"
           isDisabled={!!isSubmitButtonDisabled}
           isLoaderVisible={!!isSubmitButtonLoaderVisible}
         />
       </form>
 
-      <div className="mt-[48px]">
-        <span className="text-[0.5em] font-[400] text-[#333333]">
-          Have an Account?{" "}
-        </span>
-        <Link
-          className="text-[0.5em] font-[500] text-[#000000]"
-          href={"/login"}
-        >
+      <div className="mt-[48px] text-[16px]">
+        <span className="font-[400] text-[#333333]">Have an Account? </span>
+        <Link className="ml-[11px] font-[500] text-[#000000]" href={"/login"}>
           LOGIN
         </Link>
       </div>

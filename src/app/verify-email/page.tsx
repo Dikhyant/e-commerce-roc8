@@ -4,7 +4,7 @@ import VerifyEmailForm from "~/components/VerifyEmailForm";
 const VerifyEmail: NextPage = () => {
   return (
     <main className="flex h-screen w-screen justify-center  bg-[#ffffff13] pt-[40px]">
-      <VerifyEmailForm className="self-start" />
+      <VerifyEmailForm className="h-[453px] w-[576px] self-start" />
     </main>
   );
 };

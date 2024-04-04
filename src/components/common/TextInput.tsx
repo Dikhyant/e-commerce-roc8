@@ -44,7 +44,9 @@ const TextInput: React.FC<TextInputProps> = ({
   }
 
   return (
-    <div className={cn("w-full ", rootContainerClassName)}>
+    <div
+      className={cn("flex w-full flex-col gap-y-[7px]", rootContainerClassName)}
+    >
       {label ? (
         <h6
           className={cn(

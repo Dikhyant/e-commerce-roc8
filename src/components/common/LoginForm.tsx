@@ -130,41 +130,41 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
         The next gen business marketplace
       </h6>
 
-      <form className="mt-[32px] w-auto" onSubmit={onSubmit}>
+      <form className="mt-[32px] w-auto max-sm:w-11/12" onSubmit={onSubmit}>
         <TextInput
           name="Email"
           label="Email"
           type="email"
-          rootContainerClassName="w-[100%]"
+          rootContainerClassName="w-[456px] max-sm:w-full"
           onChangeText={onEmailValueChange}
-          inputClassName="max-[500px]:h-[40px] h-[48px] w-[456px]"
+          inputClassName=" h-[48px] "
         />
 
         <TextInput
           name="Password"
           label="Password"
           type="password"
-          rootContainerClassName="w-[100%] mt-[32px]"
+          rootContainerClassName="w-[456px] max-sm:w-full mt-[32px]"
           onChangeText={onPassordValueChange}
-          inputClassName="max-[500px]:h-[40px] h-[48px] w-[456px]"
+          inputClassName=" h-[48px] "
         />
 
         <PrimaryButton
           text="Login"
           type="submit"
-          className="mt-[40px] h-[56px] w-[456px] text-[0.5em] max-[500px]:h-[40px]"
+          className="mt-[40px] h-[56px] w-[456px] text-[16px] font-[500] max-sm:w-full"
           isDisabled={!!isSubmitButtonDisabled}
           isLoaderVisible={!!isSubmitButtonLoaderVisible}
         />
       </form>
 
-      <div className=" mt-[29px] w-[456px] border-t-[1px] border-[#C1C1C1]"></div>
+      <div className=" mt-[29px] w-[456px] border-t-[1px] border-[#C1C1C1] max-sm:w-10/12"></div>
 
       <div className="mt-[31px] text-[16px] leading-[19.36px]">
         <span className="font-[400] text-[#333333]">
           Don’t have an Account?{" "}
         </span>
-        <Link className="font-[500] text-[#000000]" href="/signup">
+        <Link className="ml-[10px] font-[500] text-[#000000]" href="/signup">
           SIGN UP
         </Link>
       </div>
