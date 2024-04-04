@@ -22,20 +22,20 @@ const MarkInterestsForm: React.FC<MarkInterestsFormProps> = ({
 }) => {
   return (
     <div
-      className={`flex h-auto w-[50vw] flex-col items-center rounded-[20px] border-[1px] border-[#C1C1C1] pb-[131px] pt-[40px] text-[2.222vw]
+      className={`flex h-auto w-[50vw] flex-col items-center rounded-[20px] border-[1px] border-[#C1C1C1] pb-[72px] pt-[40px] text-[2.222vw]
                         max-sm:w-[70vw] max-[500px]:text-[5vw] max-[400px]:w-[80vw]
                     ${className ? className : ""}
             `}
     >
-      <h3 className="font-inter text-[1em] font-[600] text-[#000]">
+      <h3 className="font-inter text-[32px] font-[600] leading-[38.73px] text-[#000]">
         Please mark your interests!
       </h3>
 
-      <h6 className="mt-[13px] font-inter text-[0.5em] font-[400] text-[#000]">
+      <h6 className="mt-[13px] font-inter text-[16px] font-[400] leading-[26px] text-[#000]">
         We will keep you notified.
       </h6>
 
-      <h5 className="ml-[60px] mt-[37px] self-start font-inter text-[0.625em] font-[500] text-[#000] ">
+      <h5 className="ml-[60px] mt-[37px] self-start font-inter text-[20px] font-[500] leading-[26px] text-[#000]">
         My saved interests!
       </h5>
 
@@ -51,7 +51,7 @@ const MarkInterestsForm: React.FC<MarkInterestsFormProps> = ({
                   onCategoryCheckBoxChange(item?.id, checked);
                 }
               }}
-              textClassName="text-[0.5em]"
+              textClassName="text-[16px]"
             />
           );
         })}
