@@ -118,25 +118,26 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
         className,
       )}
     >
-      <h3 className="text-[1em] font-[600] text-[#000]">Login</h3>
+      <h3 className="text-[32px] font-[600] leading-[38.73px] text-[#000]">
+        Login
+      </h3>
 
-      <h4 className="mt-[36px] text-[0.75em] font-[400] text-[#000]">
+      <h4 className="mt-[36px] text-[24px] font-[500] leading-[29.05px] text-[#000]">
         Welcome back to ECOMMERCE
       </h4>
 
-      <h6 className="mt-[13px] text-[0.5em] font-[400] text-[#000]">
+      <h6 className="mt-[13px] text-[16px] font-[400] leading-[19.36px] text-[#000]">
         The next gen business marketplace
       </h6>
 
-      <form className="mt-[32px] w-[86%]" onSubmit={onSubmit}>
+      <form className="mt-[32px] w-auto" onSubmit={onSubmit}>
         <TextInput
           name="Email"
           label="Email"
           type="email"
           rootContainerClassName="w-[100%]"
           onChangeText={onEmailValueChange}
-          labelClassName="text-[0.5em]"
-          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+          inputClassName="max-[500px]:h-[40px] h-[48px] w-[456px]"
         />
 
         <TextInput
@@ -145,26 +146,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
           type="password"
           rootContainerClassName="w-[100%] mt-[32px]"
           onChangeText={onPassordValueChange}
-          labelClassName="text-[0.5em]"
-          inputClassName="text-[0.5em] max-[500px]:h-[40px]"
+          inputClassName="max-[500px]:h-[40px] h-[48px] w-[456px]"
         />
 
         <PrimaryButton
           text="Login"
           type="submit"
-          className="mt-[40px] w-[100%] text-[0.5em] max-[500px]:h-[40px]"
+          className="mt-[40px] h-[56px] w-[456px] text-[0.5em] max-[500px]:h-[40px]"
           isDisabled={!!isSubmitButtonDisabled}
           isLoaderVisible={!!isSubmitButtonLoaderVisible}
         />
       </form>
 
-      <div className="mt-[29px] h-[1px] w-[86%] bg-[#C1C1C1]"></div>
+      <div className=" mt-[29px] w-[456px] border-t-[1px] border-[#C1C1C1]"></div>
 
-      <div className="mt-[31px] text-[0.5em]">
-        <span className="text-[16px] font-[400] text-[#333333]">
+      <div className="mt-[31px] text-[16px] leading-[19.36px]">
+        <span className="font-[400] text-[#333333]">
           Don’t have an Account?{" "}
         </span>
-        <Link className="text-[16px] font-[500] text-[#000000]" href="/signup">
+        <Link className="font-[500] text-[#000000]" href="/signup">
           SIGN UP
         </Link>
       </div>

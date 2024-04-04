@@ -47,7 +47,10 @@ const TextInput: React.FC<TextInputProps> = ({
     <div className={cn("w-full ", rootContainerClassName)}>
       {label ? (
         <h6
-          className={cn("text-[16px] font-[400] text-[#000]", labelClassName)}
+          className={cn(
+            "text-[16px] font-[400] leading-[19.36px] text-[#000]",
+            labelClassName,
+          )}
         >
           {label}
         </h6>
@@ -56,7 +59,7 @@ const TextInput: React.FC<TextInputProps> = ({
       )}
       <input
         className={cn(
-          "h-[48px] w-full rounded-[6px] border-[1px] border-[#C1C1C1] pl-[16px] placeholder:text-[#848484]",
+          "h-[48px] w-full rounded-[6px] border-[1px] border-[#C1C1C1] pl-[16px] text-[16px] font-[400] leading-[19.36px] placeholder:text-[16px] placeholder:font-[400] placeholder:leading-[19.36px] placeholder:text-[#848484]",
           inputClassName,
         )}
         placeholder={placeholder ? placeholder : "Enter"}
