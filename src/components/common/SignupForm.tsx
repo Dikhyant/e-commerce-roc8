@@ -129,11 +129,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ className }) => {
         className,
       )}
     >
-      <h3 className="text-[32px] font-[600] leading-[38.73px] text-[#000]">
+      <h3 className="text-[32px] font-[600] text-[#000] max-sm:text-[24px]">
         Create your account
       </h3>
 
-      <form className="mt-[32px] w-[86%]" onSubmit={onSubmit}>
+      <form className="mt-[32px] max-sm:w-11/12" onSubmit={onSubmit}>
         <TextInput
           name="Name"
           label="Name"
@@ -163,7 +163,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ className }) => {
         <PrimaryButton
           type="submit"
           text="CREATE ACCOUNT"
-          className="mt-[40px] w-[100%] text-[16px]"
+          className="mt-[40px] w-[456px] text-[16px] max-sm:w-full"
           isDisabled={!!isSubmitButtonDisabled}
           isLoaderVisible={!!isSubmitButtonLoaderVisible}
         />

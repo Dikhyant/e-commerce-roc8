@@ -26,7 +26,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   onCheckBoxClick,
 }) => {
   const [isChecked, setIsChecked] = useState<boolean>(propIsChecked);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const [buttonSize, setButtonSize] = useState<Dimension>({
     width: 20,
     height: 20,
@@ -56,11 +56,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
   }
 
   return (
-    <div className={cn("flex items-center gap-x-[12px]", className)}>
-      <button
+    <button
+      className={cn(
+        "flex items-center gap-x-[12px] hover:cursor-pointer",
+        className,
+      )}
+      onClick={onClick}
+    >
+      <div
         ref={buttonRef}
         className={cn("h-[24px] w-[24px] overflow-hidden rounded-[4px]")}
-        onClick={onClick}
       >
         {!!isChecked || (isOverridden && propIsChecked) ? (
           <CheckboxChecked
@@ -70,16 +75,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
         ) : (
           <div className={cn("h-full w-full bg-[#CCCCCC]")}></div>
         )}
-      </button>
-      <h6
+      </div>
+      <label
         className={cn(
           "font-inter text-[16px] font-[400] text-[#000000]",
           textClassName ?? textClassName,
         )}
       >
         {text}
-      </h6>
-    </div>
+      </label>
+    </button>
   );
 };
 

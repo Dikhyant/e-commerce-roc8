@@ -13,17 +13,13 @@ type HeaderNavButtonProps = React.ComponentProps<typeof HeaderNavButton>;
 const Header: React.FC<HeaderProps> = ({ headerNavButtonsData }) => {
   return (
     <header>
-      <div className="flex items-center justify-end gap-x-[20px] px-[40px] py-[12px] text-[12px] font-[400] leading-[14.52px] text-[#333333]">
+      <div className="flex items-center justify-end gap-x-[20px] px-[40px] py-[12px] text-[12px] font-[400] text-[#333333]">
         <button>Help</button>
         <button>Orders & Returns</button>
         <button>Hi, John</button>
       </div>
       <div className="flex w-full items-center justify-between bg-[#fff] px-[40px] pb-[18px] pt-[7px]">
-        <h1
-          className={cn("text-[32px] font-[700] leading-[38.73px] text-[#000]")}
-        >
-          ECOMMERCE
-        </h1>
+        <h1 className={cn("text-[32px] font-[700] text-[#000]")}>ECOMMERCE</h1>
 
         <div className="hidden items-center gap-x-[32px] md:flex">
           {headerNavButtonsData && headerNavButtonsData?.length > 0 ? (
@@ -33,9 +29,7 @@ const Header: React.FC<HeaderProps> = ({ headerNavButtonsData }) => {
                   key={item?.href}
                   label={item?.label}
                   href={item?.href}
-                  className={cn(
-                    "text-[16px] font-[600] leading-[19.36px] text-[#000000]",
-                  )}
+                  className={cn("text-[16px] font-[600] text-[#000000]")}
                 />
               );
             })

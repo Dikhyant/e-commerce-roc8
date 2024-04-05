@@ -122,15 +122,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
         Login
       </h3>
 
-      <h4 className="mt-[36px] text-[24px] font-[500] leading-[29.05px] text-[#000]">
+      <h4 className="mt-[36px] text-center text-[24px] font-[500] text-[#000] max-sm:text-[18px]">
         Welcome back to ECOMMERCE
       </h4>
 
-      <h6 className="mt-[13px] text-[16px] font-[400] leading-[19.36px] text-[#000]">
+      <h6 className="mt-[13px] text-[16px] font-[400] text-[#000]">
         The next gen business marketplace
       </h6>
 
-      <form className="mt-[32px] w-auto max-sm:w-11/12" onSubmit={onSubmit}>
+      <form className="mt-[32px] max-sm:w-11/12" onSubmit={onSubmit}>
         <TextInput
           name="Email"
           label="Email"
